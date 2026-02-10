@@ -1,308 +1,315 @@
-title: Reichstag Elections
+title: Commons Elections
 new-page: true
 tags: event
-priority: -1
 view-if: (year = next_election_year and month >= next_election_month) or (year > next_election_year)
-on-departure: month_actions += 1; in_election = 0; next_election_year = next_election_year + 4; n_elections += 1; next_election_time = time + 48; papen_chancellor_timer = 4;
-set-jump: post_election_1928
-face-image: img/Rothe_Wahlen_1903.jpg
+on-departure: month_actions += 1; in_election = 0; next_election_year += 2; n_elections += 1; next_election_time = time + 24;
 
-# TODO: should there be an image?
+= Elections, [+ month +] [+ year +]
 
-# the low priority means that this event is only seen after all other events are resolved for the month.
-
-= Elections, [+ month : month +] [+ year +]
-
-The Reichstag elections are to be held now.
+The Commons elections are to be held now.
 
 - @election_algorithm: May we do our best...
-- @cancel_elections
 
-@cancel_elections
-title: We cannot hold the elections now. Cancel the elections.
-subtitle: This is an anti-democratic move that may backfire.
-view-if: in_emergency_government == 1 and king == "Woodsworth" and not monarchial_powers
-
-Since we are currently ruling as part of an emergency government, we may use quasi-constitutional trickery to significantly delay these elections, and continue governing via Article 48. This is likely to be extremely unpopular both with our base and with the other parties. However, this may be necessary to prevent the extremists from gaining power.
-
-- @cancel_elections_2: Yes, do it.
-- @election_algorithm: No, let's hold the elections.
-
-@cancel_elections_2
-on-departure: next_election_year = next_election_year + 1; next_election_time = time + 12; pro_republic -= 10; cpc_relation -= 8; rpc_relation -= 8; lpc_relation -= 10; pcc_relation -= 8; coup_progress += 2; workers_ccf -= 4; new_middle_ccf -= 5; old_middle_ccf -= 5; rural_ccf -= 5; catholics_ccf -= 5; unemployed_ccf -= 5; coup_progress += 2 if nsdap_normalized >= 0.3; coup_progress += 2 if nsdap_normalized + scp_normalized >= 0.5; sa_strength += 100 if coup_progress >= 7; sh_strength += 100 if coup_progress >= 7
-achievement: ausnahmezustand
-
-Fine. King [+ king +] has taken the unprecedented step of canceling these elections. New elections are scheduled for [+ next_election_month : month +] [+ next_election_year +].
-
-Let us hope this does not backfire.
-
-@post_election_1928
+@election_algorithm
 on-arrival: {!
-// set old results
-// election threshold constitutional reform
-// banning parties
-var new_party_sum = 0;
-for (var party of Q.parties) {
-    Q['old_' + party + '_r'] = Q[party + '_r'];
-    if (Q.constitutional_reform > 0) {
-        if (Q[party + '_votes'] < Q.electoral_threshold || (Q.electoral_threshold > 1 && party == 'other') || Q[party + '_banned']) {
-            Q[party + '_r'] = 0;
-        } else {
-            Q[party + '_r'] = Q[party + '_votes'];
-        }
-        new_party_sum += Q[party + '_r'];
-    } else {
-        Q[party + '_r'] = Q[party + '_votes'];
-    }
-    // if we use decimals, then we might want to truncate the numbers
-    if (Q.use_decimals) {
-        Q[party + '_r_disp'] = Q[party+'_r'].toFixed(1);
-    }  else {
-            Q[party + '_r_disp'] = Q[party+'_r'];
-    }
-    Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
-    var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
-    Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
-}
-// calculate new party sum if electoral reform
-if (Q.electoral_threshold && Q.electoral_threshold > 0) {
-    for (var party of Q.parties) {
-        if (Q[party + '_r'] > 0) {
-            if (Q.use_decimals) {
-                Q[party + '_r'] = Math.round(Q[party + '_r']*1000/new_party_sum)/10;
-            } else {
-                Q[party + '_r'] = Math.round(Q[party + '_r']*100/new_party_sum);
-            }
-        }
-        if (Q.use_decimals) {
-            Q[party + '_r_disp'] = Q[party+'_r'].toFixed(1);
-        } else {
-            Q[party + '_r_disp'] = Q[party+'_r'];
-        }
-        Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
-        var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
-        Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
-    }
+
+// Save old seat values
+for (let party of Q.parties) {
+    Q["old_" + party + "_r"] = Q[party + "_r"] || 0;
 }
 
-// get change arrows and signs
+// === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
+let pccVotes = 0;
+let ccfVotes = 0;
+let lpcVotes = 0;
+let rpcVotes = 0;
+let cpcVotes = 0;
+let scpVotes = 0;
+let nsdapVotes = 0;
+let otherVotes = 0;
+
+for (let state of Q.states) {
+  for (let cls of Q.classes) {
+    let pop = Q[state + "_" + cls] || 0;
 
 
-// The largest party can only be the NSDAP or the CCF.
-Q.largest_party = 'CCF';
-if (Q.nsdap_r >= Q.ccf_r && Q.nsdap_r >= Q.pcc_r) {
-    Q.largest_party = 'NSDAP';
+    let pcc = Q[state + "_" + cls + "_pcc"] || 0;
+    let ccf = Q[state + "_" + cls + "_ccf"] || 0;
+    let lpc = Q[state + "_" + cls + "_lpc"] || 0;
+    let rpc = Q[state + "_" + cls + "_rpc"] || 0;
+    let cpc = Q[state + "_" + cls + "_cpc"] || 0;
+    let scp = Q[state + "_" + cls + "_scp"] || 0;
+    let nsdap = Q[state + "_" + cls + "_nsdap"] || 0;
+    let other = Q[state + "_" + cls + "_other"] || 0;
+
+    let pccMod = Q[cls + "_pcc"] || 0;
+    let ccfMod = Q[cls + "_ccf"] || 0;
+    let lpcMod = Q[cls + "_lpc"] || 0;
+    let rpcMod = Q[cls + "_rpc"] || 0;
+    let cpcMod = Q[cls + "_cpc"] || 0;
+    let scpMod = Q[cls + "_scp"] || 0;
+    let nsdapMod = Q[cls + "_nsdap"] || 0;
+    let otherMod = Q[cls + "_other"] || 0;
+
+    let adjPcc = 0.2 * pcc + 0.8 * pccMod;
+    let adjCcf = 0.2 * ccf + 0.8 * ccfMod;
+    let adjLpc = 0.2 * lpc + 0.8 * lpcMod;
+    let adjRpc = 0.2 * rpc + 0.8 * rpcMod;
+    let adjCpc = 0.2 * cpc + 0.8 * cpcMod;
+    let adjScp = 0.2 * scp + 0.8 * scpMod;
+    let adjNsdap = 0.2 * nsdap + 0.8 * nsdapMod;
+    let adjOther = 0.2 * other + 0.8 * otherMod;
+
+    let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther;
+    if (totalPct === 0) continue;
+
+    pccVotes += pop * (adjPcc / totalPct);
+    ccfVotes += pop * (adjCcf / totalPct);
+    lpcVotes += pop * (adjLpc / totalPct);
+    rpcVotes += pop * (adjRpc / totalPct);
+    cpcVotes += pop * (adjCpc / totalPct);
+    spVotes += pop * (adjScp / totalPct);
+    nsdapVotes += pop * (adjNsdap / totalPct);
+    otherVotes += pop * (adjOther / totalPct);
+  }
 }
 
-if (Q.pcc_r >= Q.ccf_r && Q.pcc_r >= Q.nsdap_r) {
-    Q.largest_party = 'PCC';
+// === 3. Allocate seats using cube law ===
+let totalVotes = pccVotes + ccfVotes + lpcVotes + rpcVotes + cpcVotes + scpVotes + nsdapVotes + otherVotes;
+
+let totalSeats = 225;
+
+
+let pccShare = pccVotes / totalVotes;
+let ccfShare = ccfVotes / totalVotes;
+let lpcShare = lpcVotes / totalVotes;
+let rpcShare = rpcVotes / totalVotes;
+let cpcShare = cpcVotes / totalVotes;
+let scpShare = scpVotes / totalVotes;
+let nsdapShare = nsdapVotes / totalVotes;
+let otherShare = otherVotes / totalVotes;
+
+let pccPower = Math.pow(pccShare, 3);
+let ccfPower = Math.pow(ccfShare, 3);
+let lpcPower = Math.pow(lpcShare, 3);
+let rpcPower = Math.pow(rpcShare, 3);
+let cpcPower = Math.pow(cpcShare, 3);
+let scpPower = Math.pow(scpShare, 3);
+let nsdapPower = Math.pow(nsdapShare, 3);
+let otherPower = Math.pow(otherShare, 3);
+
+let powerTotal = pccPower + ccfPower + lpcPower + rpcPower + cpcPower + scpPower + nsdapPower + otherPower;
+
+
+let pccSeats = Math.floor((pccPower / powerTotal) * totalSeats);
+let ccfSeats = Math.floor((ccfPower / powerTotal) * totalSeats);
+let lpcSeats = Math.floor((lpcPower / powerTotal) * totalSeats);
+let rpcSeats = Math.floor((rpcPower / powerTotal) * totalSeats);
+let cpcSeats = Math.floor((cpcPower / powerTotal) * totalSeats);
+let scpSeats = Math.floor((scpPower / powerTotal) * totalSeats);
+let nsdapSeats = Math.floor((nsdapPower / powerTotal) * totalSeats);
+let otherSeats = Math.floor((otherPower / powerTotal) * totalSeats);
+
+Q.pcc_r = pccSeats;
+Q.ccf_r = ccfSeats;
+Q.lpc_r = lpcSeats;
+Q.rpc_r = rpcSeats;
+Q.cpc_r = cpcSeats;
+Q.scp_r = scpSeats;
+Q.nsdap_r = nsdapSeats;
+Q.other_r = otherSeats;
+
+// === 4. Track seat changes ===
+for (let party of Q.parties) {
+  let cur = Q[party + "_r"];
+  let old = Q["old_" + party + "_r"];
+  let change = cur - old;
+  Q["change_" + party + "_r"] = change;
+  Q["str_change_" + party + "_r"] = (change > 0 ? "+" : "") + change;
+  Q[party + "_r_disp"] = Q.use_decimals ? cur.toFixed(1) : cur;
 }
 
-// coalitions
-Q.weimar_coalition = Q.ccf_r + Q.lpc_r + Q.rpc_r - 3;
-Q.grand_coalition = Q.ccf_r + Q.lpc_r + Q.rpc_r + Q.cpc_r;
-Q.bourgeois_coalition = Q.lpc_r + Q.rpc_r + Q.cpc_r + Q.other_r;
-Q.center_right_coalition = Q.rpc_r + Q.lpc_r + Q.cpc_r + Q.other_r + Q.scp_r;
-Q.right_coalition = Q.rpc_r + Q.cpc_r + Q.other_r + Q.scp_r;
-Q.far_right_coalition = Q.scp_r + Q.nsdap_r;
-Q.left_coalition = Q.ccf_r + Q.pcc_r + Q.sapd_r;
-// this is an absurd concept lol
-Q.popular_front_coalition = Q.ccf_r + Q.pcc_r + Q.rpc_r + Q.lpc_r - 3 + Q.sapd_r;
-Q.anti_democratic_coalition = Q.pcc_r + Q.nsdap_r + Q.scp_r;
-// aka everyone except nazi, pcc, scp
-Q.neo_weimar_coalition = Q.ccf_r + Q.lpc_r + Q.rpc_r + Q.cpc_r + Q.other_r;
-// Hitler + Right-wing parties (only comes into effect if you've alienated RPC too badly)
-Q.hitler_right_coalition = Q.rpc_r + Q.scp_r + Q.nsdap_r;
-// Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = Q.ccf_r + Q.pcc_r + Q.lpc_r + Q.sapd_r;
+// === 5. Largest party tracker ===
+Q.largest_party_r = "ccf";
+if (Q.lpc_r >= Q.ccf_r && Q.lpc_r >= Q.other_r) Q.largest_party_r = "lpc";
+if (Q.other_r >= Q.ccf_r && Q.other_r >= Q.lpc_r) Q.largest_party_r = "other";
 
-if (Q.pcc_relation >= 30) {
-    Q.weimar_coalition += Q.sapd_r;
+// === 6. Majority display vars ===
+Q.ccf_majority_r = Q.ccf_r;
+Q.lpc_majority_r = Q.lpc_r;
+Q.other_majority_r = Q.other_r;
+
+// === 7. Record the result ===
+let result = { date: Q.year + "-" + Q.month };
+for (let party of Q.parties) {
+    result[party] = Q[party + "_r"];
+}
+Q.commons_election_records = Q.commons_election_records || [];
+Q.commons_election_records.push(result);
+
+// === 8. Majority strength ===
+let totalCommons = Q.total_commons_seats || (Q.ccf_r + Q.lpc_r + Q.other_r);
+let ccfPctCommons = (Q.ccf_r / totalCommons) * 100;
+
+if (ccfPctCommons >= 66.7) {
+    Q.commons_majority = 3;
+} else if (ccfPctCommons >= 50) {
+    Q.commons_majority = 2;
+} else {
+    Q.commons_majority = 0;
 }
 
-Q.leverage = Q.ccf_r;
-
-Q.grand_coalition_failed = 0;
-// Reset government and ministers... Based on Brüning's 1930 govt
-Q.coalition_dissent = 0;
-Q.pcc_coalition_dissent = 0;
-Q.ccf_in_government = 0;
-Q.in_weimar_coalition = 0;
-Q.in_grand_coalition = 0;
-Q.in_left_front = 0;
-Q.in_popular_front = 0;
-Q.in_emergency_government = 0;
-Q.in_minority_government = 0;
-Q.in_unity_government = 0;
-Q.ccf_toleration = 0;
-Q.ccf_caretaker = 0;
-Q.foreign_minister_party = 'CPC';
-Q.interior_minister_party = 'RPC';
-Q.justice_minister_party = 'I';
-Q.labor_minister_party = 'RPC';
-Q.reichswehr_minister_party = 'I';
-Q.economic_minister_party = Q.lpc_name;
-Q.finance_minister_party = 'CPC';
-Q.agriculture_minister_party = 'RPC';
-
-// reset PCC goals
-Q.pcc_goals_seen = 0;
-Q.pcc_ultimatum_seen = 0;
-Q.welfare_goal = 0;
-Q.agriculture_goal = 0;
-Q.economy_goal = 0;
-Q.finance_goal = 0;
-Q.labor_goal = 0;
-Q.foreign_goal = 0;
-Q.interior_goal = 0;
-Q.reichswehr_goal = 0;
-
-Q.welfare_goal_completed = 0;
-Q.agriculture_goal_completed = 0;
-Q.economy_goal_completed = 0;
-Q.finance_goal_completed = 0;
-Q.labor_goal_completed = 0;
-Q.foreign_goal_completed = 0;
-Q.interior_goal_completed = 0;
-Q.reichswehr_goal_completed = 0;
-
-Q.strike_term_seen = 0;
-
-Q.rpc_minus_bvp_r = Q.rpc_r - 3;
-
-// understanding the enemy
-if (Q.nsdap_r >= 15) {
-    Q.understanding_enemy_timer = 2;
-}
-
-var election_result = {'date': new Date(Q.year, Q.month - 1)};
-for (var party of Q.parties) {
-    election_result[party] = Q[party + '_r'];
-}
-Q.election_records.push(election_result);
 !}
-on-departure: nazi_urgency = 1 if (nazi_urgency == 0 and nsdap_r >= 15)
 on-display: {!
-data = [
-    {
-        "id": "pcc",
-        "legend": "PCC",
-        "name": "PCC",
-        "seats": Math.round(Q.pcc_r*5),
+  function drawChart() {
+    var chartData = [
+      {
+        id: "PCC",
+        seats: Math.round(Q.pcc_r),
+        color: "#A00000",
+        outline: "#A00000"
+      },
+      {
+        id: "CCF",
+        seats: Math.round(Q.ccf_r),
+        color: "#D26E28",
+        outline: "#D26E28"
+      },
+      {
+        id: "LPC",
+        seats: Math.round(Q.lpc_r),
+        color: "#BE0028",
+        outline: "#BE0028"
+      },
+      {
+        id: "RPC",
+        seats: Math.round(Q.rpc_r),
+        color: "#E7DB73",
+        outline: "#E7DB73"
+      },
+      {
+        id: "CPC",
+        seats: Math.round(Q.cpc_r),
+        color: "#0055A5",
+        outline: "#0055A5"
+      },
+      {
+        id: "SCP",
+        seats: Math.round(Q.scp_r),
+        color: "#50E23D",
+        outline: "#50E23D"
+      },
+      {
+        id: "NSDAP",
+        seats: Math.round(Q.nsdap_r),
+        color: "#954B00",
+        outline: "#954B00"
+      },
+      {
+        id: "others",
+        seats: Math.round(Q.other_r),
+        color: "#a0a0a0",
+        outline: "#a0a0a0"
+      }
+    ].filter(d => d.seats > 0);
+
+    var width = Math.min(500, document.getElementById('content').offsetWidth - 50);
+
+    var container = d3.select("#commonsChart");
+    if (container.empty()) {
+      container = d3.select("#content").append("svg").attr("id", "commonsChart");
     }
-];
-if (Q.sapd_formed && Q.sapd_r) {
-    data.push({
-            "id": "sapd",
-            "legend": "SAPD",
-            "name": "SAPD",
-            "seats": Math.round(Q.sapd_r*5),
-            });
-}
-data = data.concat([
-    {
-        "id": "ccf",
-        "legend": "CCF",
-        "name": "CCF",
-        "seats": Math.round(Q.ccf_r*5),
-    },
-    {
-        "id": "lpc",
-        "legend": Q.lpc_name,
-        "name": Q.lpc_name,
-        "seats": Math.round(Q.lpc_r*5),
-    },
-    {
-        "id": "rpc",
-        "legend": "Center",
-        "name": "Center",
-        "seats": Math.round((Q.rpc_r - 3)*5),
-    },
-    {
-        "id": "bvp",
-        "legend": "BVP",
-        "name": "BVP",
-        "seats": Math.round(3*5),
-    },
-    {
-        "id": "cpc",
-        "legend": "CPC",
-        "name": "CPC",
-        "seats": Math.round(Q.cpc_r*5),
-    },
-    {
-        "id": "other",
-        "legend": "Other",
-        "name": "Other",
-        "seats": Math.round(Q.other_r*5),
-    },
-    {
-        "id": "scp",
-        "legend": "SCP",
-        "name": "SCP",
-        "seats": Math.round(Q.scp_r*5),
-    },
-    {
-        "id": "nsdap",
-        "legend": "NSDAP",
-        "name": "NSDAP",
-        "seats": Math.round(Q.nsdap_r*5),
-    },
-]);
+    container.attr("width", width)
+             .attr("height", width / 2)
+             .html("");
 
-if (window && d3) {
-    var width = 500; 
-    var height = 500;
-    var screenWidth = document.getElementById('content').offsetWidth;
-    if (screenWidth < width - 50) {
-        width = screenWidth - 50; 
-        height = width;
-        document.getElementById("reichstag").style.height = screenWidth/2 + "px";
-    } 
+    var parliament = d3.parliament().width(width).innerRadiusCoef(0.4);
+    container.data([chartData]).call(parliament);
+  }
 
-    var parliament = d3.parliament();
-    parliament.width(width).height(height).innerRadiusCoef(0.4);
-    parliament.enter.fromCenter(true).smallToBig(true);
-    parliament.exit.toCenter(false).bigToSmall(true);
-    d3.select("#reichstag").datum(data).call(parliament);
-}
+  if (!window.d3) {
+    var script = document.createElement('script');
+    script.src = 'https://d3js.org/d3.v7.min.js';
+    script.onload = function() {
+      var subscript = document.createElement('script');
+      subscript.src = 'https://cdn.jsdelivr.net/npm/d3-parliament@1.0.3/build/d3-parliament.min.js';
+      subscript.onload = drawChart;
+      document.head.appendChild(subscript);
+    };
+    document.head.appendChild(script);
+  } else if (!window.d3.parliament) {
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/d3-parliament@1.0.3/build/d3-parliament.min.js';
+    script.onload = drawChart;
+    document.head.appendChild(script);
+  } else {
+    drawChart();
+  }
 !}
-go-to: coalition_menu
+go-to: ministries
 
-= Election results
+= Commons Election Results
 
-{!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
+{!<svg id="commonsChart" style="width: 500px; height: 250px;"> </svg>!}
 
 {!<table>!} 
-{!<tr><td>Party</td><td>Vote share</td><td>% Change</td></tr>!}
-{!<tr><td><div class="box" style='background-color:#D26E28; outline: 2px; outline-style: solid;'> </div> !} **CCF:** {!</td><td>!} **[+ ccf_r +]%** {!</td><td>!} **[+ str_change_ccf +]** {!</td></tr>!}
+{!<tr><td>Party</td><td>Seats</td><td>Change</td></tr>!}
 
-[? if sapd_formed : {!<tr><td><div class="box" style='background-color:#C40000'> </div> !}SAPD: {!</td><td>!} [+ sapd_r +]% {!</td><td>!} [+ str_change_sapd +] {!</td></tr>!} ?]
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} PCC: {!</td><td>!} [+ pcc_r_disp +] seats {!</td><td>!} [+ str_change_pcc_r +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#A00000'> </div> !}PCC: {!</td><td>!} [+ pcc_r +]% {!</td><td>!} [+ str_change_pcc +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#E3000F; outline: 2px solid;'> </div> !} **CCF:** {!</td><td>!} [+ ccf_r_disp +] seats {!</td><td>!} [+ str_change_ccf_r +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#BE0028'> </div> !} [+ lpc_name +]: {!</td><td>!} [+ lpc_r +]% {!</td><td>!} [+ str_change_lpc +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} LPC: {!</td><td>!} [+ lpc_r_disp +] seats {!</td><td>!} [+ str_change_lpc_r +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#961E1E'> </div> !} RPC: {!</td><td>!} [+ rpc_minus_bvp_r +]% {!</td><td>!} [+ str_change_rpc +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} RPC: {!</td><td>!} [+ rpc_r_disp +] seats {!</td><td>!} [+ str_change_rpc_r +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#69A2BE'> </div> !} BVP: {!</td><td>!} 3% {!</td><td>!} 0 {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} CPC: {!</td><td>!} [+ cpc_r_disp +] seats {!</td><td>!} [+ str_change_cpc_r +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#0055A5'> </div> !} CPC: {!</td><td>!} [+ cpc_r +]% {!</td><td>!} [+ str_change_cpc +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} SCP: {!</td><td>!} [+ scp_r_disp +] seats {!</td><td>!} [+ str_change_scp_r +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} NSDAP: {!</td><td>!} [+ nsdap_r_disp +] seats {!</td><td>!} [+ str_change_nsdap_r +] {!</td></tr>!}
  
-{!<tr><td><div class="box" style='background-color:#a0a0a0'> </div> !} Others: {!</td><td>!} [+ other_r +] % {!</td><td>!} [+ str_change_other +] {!</td></tr>!}
-
-{!<tr><td><div class="box" style='background-color:#3C8C6E'> </div> !} SCP: {!</td><td>!} [+ scp_r +]% {!</td><td>!} [+ str_change_scp +] {!</td></tr>!}
-
-{!<tr><td><div class="box" style='background-color:#954B00'> </div> !} NSDAP: {!</td><td>!} [+ nsdap_r +]% {!</td><td>!} [+ str_change_nsdap +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#a0a0a0'> </div> !} Others: {!</td><td>!} [+ other_r_disp +] seats {!</td><td>!} [+ str_change_other_r +] {!</td></tr>!}
 {!</table>!}
+
+
+
+
+
+
+
+
+
+# BELOW IS FROM MAIN
+# BELOW IS FROM MAIN
+# BELOW IS FROM MAIN
+# BELOW IS FROM MAIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 **Potential coalitions:**
 
-Weimar Coalition (CCF + RPC + [+ lpc_name +]): [+ weimar_coalition +]%
+Weimar Coalition (CCF + RPC + LPC): [+ weimar_coalition +]%
 
-Grand Coalition (CCF + RPC + BVP + [+ lpc_name +] + CPC): [+ grand_coalition +]%
+Grand Coalition (CCF + RPC + BVP + LPC + CPC): [+ grand_coalition +]%
 
-Bourgeois Coalition (RPC + BVP + [+ lpc_name +] + CPC + Others): [+ bourgeois_coalition +]%
+Bourgeois Coalition (RPC + BVP + LPC + CPC + Others): [+ bourgeois_coalition +]%
 
 Right-wing Coalition (RPC + BVP + CPC + Others + SCP): [+ right_coalition +]%
 
@@ -331,8 +338,8 @@ There are some potential coalition arrangements.
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
-subtitle: CCF + PCC + RPC + [+ lpc_name +]  [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%)
-unavailable-subtitle: CCF + PCC + RPC + [+ lpc_name +] [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%) - [? if ((pcc_relation < 65 and pcc_party_leader == "Thälmann") or (pcc_relation < 45 and pcc_party_leader == "Conciliators")): We do not have good enough relations with the PCC. ?][? if (rpc_relation < 45 and rpc_party_leader == "Joos") or (rpc_relation < 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation < 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators"): We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
+subtitle: CCF + PCC + RPC + LPC  [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%)
+unavailable-subtitle: CCF + PCC + RPC + LPC [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%) - [? if ((pcc_relation < 65 and pcc_party_leader == "Thälmann") or (pcc_relation < 45 and pcc_party_leader == "Conciliators")): We do not have good enough relations with the PCC. ?][? if (rpc_relation < 45 and rpc_party_leader == "Joos") or (rpc_relation < 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation < 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators"): We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
 view-if: popular_front_coalition >= 50
 choose-if: (((pcc_relation >= 65 and pcc_party_leader == "Thälmann") or (pcc_relation >= 45 and pcc_party_leader == "Conciliators")) and ((rpc_relation >= 45 and rpc_party_leader == "Joos") or (rpc_relation >= 65 and rpc_party_leader != "Joos" and pcc_party_leader != "Conciliators") or (rpc_relation >= 55 and rpc_party_leader != "Joos" and pcc_party_leader == "Conciliators")) and lpc_relation >= 50 and communist_coalition >= 3) or (rpc_party_leader == "Joos" and pcc_party_leader == "Conciliators" and rpc_relation >= 30 and pcc_relation >= 30)
 
@@ -617,10 +624,10 @@ The third option is to have new elections.
 
 @new_grand_coalition
 title: A "New Grand Coalition" of all the constitutional parties?
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%)
 view-if: neo_weimar_coalition >= 50 and grand_coalition < 50
 choose-if: rpc_relation >= 50 and cpc_relation >= 30
-unavailable-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%) - [? if rpc_relation < 50 : We do not have adequate relations with the Center Party. ?][? if cpc_relation < 30 : We do not have adequate relations with the CPC. ?]
+unavailable-subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%) - [? if rpc_relation < 50 : We do not have adequate relations with the Center Party. ?][? if cpc_relation < 30 : We do not have adequate relations with the CPC. ?]
 
 How do we convince vehemently anti-socialist parties to allow us to form a majority coalition? Our largely benevolent relations with the Center and CPC may allow us some leverage.
 
@@ -658,7 +665,7 @@ We have assembled a new coalition under J.S. Woodsworth.
 
 @unity_government
 title: The Center Party offers a "Government of National Unity" under Chancellor Joseph Wirth.
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC + Others ([+ neo_weimar_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC + Others ([+ neo_weimar_coalition +]%)
 view-if: rpc_party_leader == "Joos" and neo_weimar_coalition >= 50 and weimar_coalition < 50 and rpc_relation >= 10
 
 The Center Party leader, Joseph Joos, clearly sees the threat from the ascension of the anti-democratic extremist parties, and thus tries to negotiate a "Government of National Unity" to save the republic. This coalition would be led by Joseph Wirth, a left-leaning member of the Center Party and former chancellor, and would encompass all of the constitutional parties. Our role in this government might be limited, however.
@@ -920,12 +927,12 @@ We have won the vote of no confidence, and are currently ruling under an CCF min
 
 @weimar_coalition
 title: We can form a Weimar Coalition.
-subtitle: CCF + RPC + [+ lpc_name +] [? if sapd_formed and pcc_relation >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
+subtitle: CCF + RPC + LPC [? if sapd_formed and pcc_relation >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50
 on-arrival: leverage += 5; leverage += 5 if rpc_party_leader == "Joos"; in_weimar_coalition = 1; ccf_in_government = 1; in_popular_front = 0; in_left_front = 0; foreign_minister_party = "RPC"; interior_minister_party = "RPC"; justice_minister_party = lpc_name; labor_minister_party = "RPC"; reichswehr_minister_party = "I"; economic_minister_party = lpc_name; finance_minister_party = "RPC"; agriculture_minister_party = "RPC"; foreign_minister = "Wirth"; interior_minister = "Wirth"; justice_minister = "Koch-Weser"; labor_minister = "Stegerwald"; reichswehr_minister = "Groener"; economic_minister = "Dietrich"; finance_minister = "Köhler"; agriculture_minister = "Hermes";
 achievement: weimar_coalition
 
-We have enough votes to form a "Weimar Coalition" government consisting of the CCF, Center (RPC) and Democratic ([+ lpc_name +]) parties! This has been our preferred governing coalition since 1919.
+We have enough votes to form a "Weimar Coalition" government consisting of the CCF, Center (RPC) and Democratic (LPC) parties! This has been our preferred governing coalition since 1919.
 
 Who should be the chancellor?
 
@@ -949,7 +956,7 @@ Robert Gardiner has been appointed chancellor.
 @grand_coalition
 title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
-subtitle: CCF + RPC + BVP + [+ lpc_name +] + CPC ([+ grand_coalition +]%)
+subtitle: CCF + RPC + BVP + LPC + CPC ([+ grand_coalition +]%)
 on-arrival: in_grand_coalition = 1; in_popular_front = 0; in_left_front = 0
 go-to: grand_coalition_ccf_lead if (n_elections <= 1 and largest_party == "CCF") or (largest_party == "CCF" and ccf_r >= 30) or king = "Woodsworth"; grand_coalition_rpc_lead if king != "Woodsworth" and ((n_elections > 1 and ccf_r < 30) or (n_elections <= 1 and largest_party != "CCF"))
 
@@ -959,7 +966,7 @@ go-to: grand_coalition_ccf_lead if (n_elections <= 1 and largest_party == "CCF")
 @grand_coalition_rpc_lead
 go-to: grand_coalition_rpc_lead_2 if cpc_relation >= 30; grand_coalition_fail if cpc_relation < 30
 
-There are enough votes to form a majority coalition consisting of the CCF, Center (RPC), Bavarian People's (BVP), Democratic ([+ lpc_name +]), and People's (CPC) parties. Given our rather weak electoral performance, [? if ccf_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_ccf = 1 : and the vote of no confidence against us, ?] King George V has asked the Center Party to take the lead role in forming a government.
+There are enough votes to form a majority coalition consisting of the CCF, Center (RPC), Bavarian People's (BVP), Democratic (LPC), and People's (CPC) parties. Given our rather weak electoral performance, [? if ccf_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_ccf = 1 : and the vote of no confidence against us, ?] King George V has asked the Center Party to take the lead role in forming a government.
 
 # TODO: if the CCF participated in bringing down the previous government via a vote-of-no-confidence, or if we were essentially removed from government by our coalition partners, we should be more reluctant to participate in a new government.
 
@@ -1117,7 +1124,7 @@ As expected, the CPC is too set in their anti-democratic ways.
 @grand_coalition_ccf_lead
 on-arrival: leverage -= 15 if cpc_relation < 20
 
-As expected, the CCF is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. King [+ king +] has asked us to form a majority coalition with the Center (RPC), Bavarian People's (BVP), Democratic ([+ lpc_name +]), and People's (CPC) parties.
+As expected, the CCF is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. King [+ king +] has asked us to form a majority coalition with the Center (RPC), Bavarian People's (BVP), Democratic (LPC), and People's (CPC) parties.
 
 [? if cpc_relation < 20 : As our relation with the CPC is poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
@@ -1352,56 +1359,56 @@ This coalition arrangement is tolerable to all.
 
 @drop_labor
 title: Drop the Labor Ministry.
-view-if: labor_minister_party = "CCF"
+view-if: labor_minister_party = "CPC"
 on-arrival: labor_minister_party = "RPC"; labor_minister = "Stegerwald"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_interior
 title: Drop the Interior Ministry.
-view-if: interior_minister_party = "CCF"
-on-arrival: interior_minister_party = "RPC"; interior_minister = "Wirth"; leverage += 5;
+view-if: interior_minister_party = "CPC"
+on-arrival: interior_minister_party = "CPC"; interior_minister = "Wirth"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_finance
 title: Drop the Finance Ministry.
-view-if: finance_minister_party = "CCF"
+view-if: finance_minister_party = "CPC"
 on-arrival: finance_minister_party = "CPC"; finance_minister = "Moldenhauer"; leverage += 10; finance_minister_party = "RPC" if in_weimar_coalition or in_popular_front; finance_minister = "Köhler" if in_weimar_coalition or in_popular_front
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_economic
 title: Drop the Economic Ministry.
-view-if: economic_minister_party = "CCF"
+view-if: economic_minister_party = "CPC"
 on-arrival: economic_minister_party = "CPC"; economic_minister = "Curtius"; leverage += 10; economic_minister_party = lpc_name if in_weimar_coalition or in_popular_front; economic_minister = "Dietrich" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_justice
 title: Drop the Justice Ministry.
-view-if: justice_minister_party = "CCF"
-on-arrival: justice_minister_party = lpc_name; justice_minister = "Koch-Weser"; leverage += 10;
+view-if: justice_minister_party = "CPC"
+on-arrival: justice_minister_party = "CPC"; justice_minister = "Koch-Weser"; leverage += 10;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_foreign
 title: Drop the Foreign Ministry.
-view-if: foreign_minister_party = "CCF"
+view-if: foreign_minister_party = "CPC"
 on-arrival: foreign_minister_party = "CPC"; foreign_minister = "Stresemann"; foreign_minister = "Curtius" if streseman_dead; leverage += 10; foreign_minister_party = "RPC" if in_weimar_coalition or in_popular_front; foreign_minister = "Wirth" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_agriculture
 title: Drop the Agriculture Ministry.
-view-if: agriculture_minister_party = "CCF"
-on-arrival: agriculture_minister_party = lpc_name; agriculture_minister = "Dietrich"; leverage += 10; agriculture_minister_party = "RPC" if in_weimar_coalition; agriculture_minister = "Hermes" if in_weimar_coalition
+view-if: agriculture_minister_party = "CPC"
+on-arrival: agriculture_minister_party = "CPC"; agriculture_minister = "Dietrich"; leverage += 10; agriculture_minister_party = "RPC" if in_weimar_coalition; agriculture_minister = "Hermes" if in_weimar_coalition
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_reichswehr
 title: Drop the Reichswehr Ministry.
-view-if: reichswehr_minister_party = "CCF"
-on-arrival: reichswehr_minister_party = "I"; reichswehr_minister = "Groener"; leverage += 15;
+view-if: reichswehr_minister_party = "CPC"
+on-arrival: reichswehr_minister_party = "CPC"; reichswehr_minister = "Groener"; leverage += 15;
 tags: drop_mins_1928
 go-to: ministries
