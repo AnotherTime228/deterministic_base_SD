@@ -88,7 +88,7 @@ Q.scp_r_pro = Math.floor(scpShare * totalSeats);
 Q.nsdap_r_pro = Math.floor(nsdapShare * totalSeats);
 Q.other_r_pro = Math.floor(otherShare * totalSeats);
 
-console.log(pcc_r_pro, ccf_r_pro, lpc_r_pro, rpc_r_pro, cpc_r_pro, scp_r_pro, nsdap_r_pro, other_r_pro)
+console.log(pcc_r, ccf_r, lpc_r, rpc_r, cpc_r, scp_r, nsdap_r, other_r)
 
 !}
 go-to: jumpScene
