@@ -3,60 +3,141 @@ new-page: true
 on-arrival: {!
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
-// make sure no stat is below 0.
-for (var c of Q.classes) {
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
-        }
+
+// Clamp out of bound class-party values
+for (let c of Q.classes) {
+
+    // Step 1: clamp each party
+    for (let party of Q.parties) {
+        if (Q[c + '_' + party] < 0) Q[c + '_' + party] = 0;
+        if (Q[c + '_' + party] > 100) Q[c + '_' + party] = 100;
+    }
+
+    // Step 2: calculate total
+    let total =
+        Q[c + '_lpc'] +
+        Q[c + '_ccf'] +
+        Q[c + '_other'];
+
+    // Step 3: scale down if over 100
+    if (total > 100) {
+        let scale = 100 / total;
+
+        Q[c + '_lpc'] *= scale;
+        Q[c + '_ccf'] *= scale;
+        Q[c + '_other'] *= scale;
+    }
+
+    // Optional: round to whole numbers
+    Q[c + '_lpc'] = Math.round(Q[c + '_lpc']);
+    Q[c + '_ccf'] = Math.round(Q[c + '_ccf']);
+    Q[c + '_other'] = Math.round(Q[c + '_other']);
+}
+
+// Clamp pro_republic
+Q.pro_republic = Math.min(Math.max(Q.pro_republic, 0), 99);
+
+for (let c of Q.classes) {
+    let classVotes = 0;
+    for (let party of Q.parties) classVotes += Q[c + '_' + party];
+    if (classVotes === 0) classVotes = 1; // prevent divide by zero
+    for (let party of Q.parties) {
+        let val = Q[c + '_' + party];
+        let normalized = val / classVotes;
+        Q[c + '_' + party + '_normalized'] = normalized;
+        Q[c + '_' + party + '_display'] = Math.min(100, Math.round(100 * normalized));
     }
 }
 
-Q.pro_republic = Math.round(Q.pro_republic);
-Q.nationalism = Math.round(Q.nationalism);
-Q.socialism = Math.round(Q.socialism);
+// Party support
+let totalSupport = 0;
+for (let party of Q.parties) {
+    let support = 0;
+    for (let c of Q.classes) {
+        if (Q.old_demographics) support += Q[c] * Q[c + '_' + party];
+        else support += Q[c] * Q[c + '_' + party + '_normalized'];
+    }
+    Q[party + '_support'] = support;
+    totalSupport += support;
+}
 
-if (Q.pro_republic < 0) {
-    Q.pro_republic = 0;
+// Normalize overall party support
+for (let party of Q.parties) {
+    Q[party + '_normalized'] = totalSupport ? Q[party + '_support'] / totalSupport : 1 / Q.parties.length;
+    Q[party + '_votes'] = Math.round(Q[party + '_normalized'] * 100);
+    Q[party + '_votes_display'] = Q[party + '_votes'];
 }
-if (Q.pro_republic >= 100) {
-    Q.pro_republic = 99;
-}
-// re-calculate party support
-// calculate normalized class voting for the achievements
-for (var c of Q.classes) {
-    var class_votes = 0;
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
-        }
-        class_votes += Q[c+'_'+party];
+
+// === Commons Projections ===
+let lpcVotesCommons = 0, ccfVotesCommons = 0, otherVotesCommons = 0;
+
+for (let state of Q.states) {
+    for (let cls of Q.classes) {
+        let pop = Q[state + "_" + cls] || 0;
+       let pcc = Q[state + "_" + cls + "_pcc"] || 0;
+       let ccf = Q[state + "_" + cls + "_ccf"] || 0;
+       let lpc = Q[state + "_" + cls + "_lpc"] || 0;
+       let rpc = Q[state + "_" + cls + "_rpc"] || 0;
+       let cpc = Q[state + "_" + cls + "_cpc"] || 0;
+       let scp = Q[state + "_" + cls + "_scp"] || 0;
+       let nsdap = Q[state + "_" + cls + "_nsdap"] || 0;
+       let other = Q[state + "_" + cls + "_other"] || 0;
+
+        let pccMod = Q[cls + "_pcc"] || 0;
+        let ccfMod = Q[cls + "_ccf"] || 0;
+        let lpcMod = Q[cls + "_lpc"] || 0;
+        let rpcMod = Q[cls + "_rpc"] || 0;
+        let cpcMod = Q[cls + "_cpc"] || 0;
+        let scpMod = Q[cls + "_scp"] || 0;
+        let nsdapMod = Q[cls + "_nsdap"] || 0;
+        let otherMod = Q[cls + "_other"] || 0;
+
+        let adjPcc = 0.2 * lpc + 0.8 * pccMod;
+        let adjCcf = 0.2 * ccf + 0.8 * ccfMod;
+        let adjLpc = 0.2 * lpc + 0.8 * lpcMod;
+        let adjCpc = 0.2 * lpc + 0.8 * cpcMod;
+        let adjRpc = 0.2 * lpc + 0.8 * rpcMod;
+        let adjScp = 0.2 * lpc + 0.8 * scpMod;
+        let adjNsdap = 0.2 * lpc + 0.8 * nsdapMod;
+        let adjOther = 0.2 * other + 0.8 * otherMod;
+
+         let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther;
+    if (totalPct === 0) continue;
+
+        pccVotes += pop * (adjPcc / totalPct);
+        ccfVotes += pop * (adjCcf / totalPct);
+        lpcVotes += pop * (adjLpc / totalPct);
+        rpcVotes += pop * (adjRpc / totalPct);
+        cpcVotes += pop * (adjCpc / totalPct);
+        scpVotes += pop * (adjScp / totalPct);
+        nsdapVotes += pop * (adjNsdap / totalPct);
+        otherVotes += pop * (adjOther / totalPct); 
     }
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
-        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
-    }
 }
-// calculate support for each of the parties
-var total_support = 0; 
-for (var party of Q.parties) {
-    var party_support = 0;
-    for (var c of Q.classes) {
-        if (Q.old_demographics) { 
-            party_support += Q[c]*Q[c+'_'+party];
-        } else  { 
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
-        } 
-    }
-    Q[party + '_support'] = party_support;
-    total_support += party_support; 
-}
-// 2. normalize support (fraction)
-for (var party of Q.parties) {
-    Q[party+'_normalized'] = Q[party + '_support']/total_support;
-    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
-    Q[party+'_votes_display'] = Math.round(Q[party+'_normalized']*100);
-}
+
+// Cube law proportional allocation
+let totalVotesCommons = lpcVotesCommons + ccfVotesCommons + otherVotesCommons;
+if (totalVotesCommons === 0) totalVotesCommons = 1; // prevent NaN
+let pccShare = pccVotes / totalVotes;
+let ccfShare = ccfVotes / totalVotes;
+let lpcShare = lpcVotes / totalVotes;
+let rpcShare = rpcVotes / totalVotes;
+let cpcShare = cpcVotes / totalVotes;
+let scpShare = scpVotes / totalVotes;
+let nsdapShare = nsdapVotes / totalVotes;
+let otherShare = otherVotes / totalVotes;
+
+Q.pcc_r_pro = Math.floor(pccShare * (Q.total_commons_seats || 225));
+Q.ccf_r_pro = Math.floor(ccfShare * (Q.total_commons_seats || 225));
+Q.lpc_r_pro = Math.floor(lpcShare * (Q.total_commons_seats || 225));
+Q.rpc_r_pro = Math.floor(rpcShare * (Q.total_commons_seats || 225));
+Q.cpc_r_pro = Math.floor(cpcShare * (Q.total_commons_seats || 225));
+Q.scp_r_pro = Math.floor(scpShare * (Q.total_commons_seats || 225));
+Q.nsdap_r_pro = Math.floor(nsdapShare * (Q.total_commons_seats || 225));
+Q.other_r_pro = (Q.total_commons_seats || 225) - Q.lpc_r_pro - Q.ccf_r_pro;
+
+
+
 
 
 // set faction strength/dissent to 0
@@ -74,6 +155,8 @@ for (var c of Q.factions) {
 if (Q.unemployed <= 1) {
     Q.unemployed = 1;
 }
+
+
 
 // re-calculate dissent.
 var total_strength = Q.left_strength + Q.center_strength + Q.labor_strength + Q.reformist_strength + Q.neorevisionist_strength;
