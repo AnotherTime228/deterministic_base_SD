@@ -52,7 +52,7 @@ for (let state of Q.states) {
     let adjNsdap = 0.2 * lpc + 0.8 * nsdapMod;
     let adjOther = 0.2 * other + 0.8 * otherMod;
 
-    let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther + ;
+    let totalPct = adjPcc + adjCcf + adjLpc + adjRpc + adjCpc + adjScp + adjNsdap + adjOther +;
     if (totalPct === 0) continue;
 
     pccVotes += pop * (adjPcc / totalPct);
