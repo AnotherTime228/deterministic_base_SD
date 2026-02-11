@@ -1,8 +1,7 @@
 title: Post Event
 new-page: true
 on-arrival: {!
-Q.last_advisor_action = 0;
-Q.last_cabinet_action = 0;
+// preserve advisor/cabinet action flags so post-event can act on them
 
 // Clamp out of bound class-party values
 for (let c of Q.classes) {
@@ -197,7 +196,8 @@ if (Q.dissent < 0) {
 }
 
 // 1. update dates
-if (Q.month_actions >= 1) {
+// advance time when explicit month actions occurred or an advisor/cabinet action was used
+if (Q.month_actions >= 1 || Q.last_advisor_action || Q.last_cabinet_action) {
     Q.time += 1;
     Q.month_actions = 0;
     Q.month += 1;
@@ -558,6 +558,9 @@ if (Q.month_actions >= 1) {
             Q.catholics_ccf -= 6/12;
         }
     }
+    // clear advisor/cabinet action flags after advancing time
+    Q.last_advisor_action = 0;
+    Q.last_cabinet_action = 0;
 }
 Q.has_event = 0;
 // check if there are any cards in #event, and then go to main if not.
