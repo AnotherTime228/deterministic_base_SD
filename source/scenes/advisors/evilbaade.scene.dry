@@ -2,7 +2,7 @@ title: Evil Fritz Baade
 is-pinned-card: true
 tags: advisor, reformist
 card-image: img/portraits/BaadeFritz.jpg
-view-if: baade_advisor = 1
+view-if: evil_baade_advisor = 1
 new-page: true 
 
 = Evil Fritz Baade
