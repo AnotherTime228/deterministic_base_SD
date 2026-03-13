@@ -244,6 +244,17 @@ Baade has been removed as an advisor.
 
 #The Reformist faction disapproves.
 
+@remove_evil_baade
+title: Remove Evil Baade
+view-if: evil_baade_advisor = 1
+tags: remove_advisor
+on-arrival: evil_baade_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Evil Baade has been removed as an advisor.
+
+#The Reformist faction disapproves.
+
 
 @remove_hirschfeld
 title: Remove Hirschfeld
@@ -597,6 +608,18 @@ go-to: advisor_menu
 tags: nonfactional_advisor
 
 Fritz Baade is now an advisor.
+
+@add_evil_baade
+title: Evil Fritz Baade
+subtitle: Evil Fritz Baade is one of the fat fucking chuds in the SPD. {!<br><br>!}[? if difficulty < 0 : Actions - Agricultural Policy, Rural Campaigning, Addressing the Economic Crisis ?]
+is-card: true
+card-image: img/portraits/BaadeFritz.jpg
+view-if: evil_baade_advisor = 0 and n_advisors < 3
+on-arrival: evil_baade_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: nonfactional_advisor
+
+Evil Fritz Baade is now an advisor. Why would you do this?
 
 
 @add_hirschfeld
