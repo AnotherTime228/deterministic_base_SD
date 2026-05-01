@@ -526,11 +526,37 @@ Q.crevia_relation = 10;
 Q.west_relation = 10;
 Q.vyliria_relation = 10;
 Q.pekoria_relation = 10;
+Q.carberdia_relation = 10;
+Q.vyliria_left_relation = 18;
 
-Q.vyl_rev_strenth = 0;
+// Events 
 Q.vyl_rev = 0;
 Q.vyl_suc = 0;
 Q.kell_coup = 0;
+Q.pek_thi_war = 1;
+Q.pek_banking_act = 0;
+Q.zurukstan_rev = 0;
+Q.purp_hand_carberde = 0;
+Q.thi_rev = 0;
+Q.arctien_crisis = 0;
+Q.oil_crisis = 0; 
+
+// International displays
+Q.pek_banking = 'full debt repayment';
+Q.zurukstan = 'gurella warfare';
+Q.kell_coup_sit = 'Levion securing power';
+Q.purp_hand = 'non intervention';
+Q.vyl_rev_sit = 'social instabilty and labour crackdowns';
+Q.arctien_crisis_sit = 'Vylirian arktien revolution';
+Q.thi_rev_sit = 'social unrest';
+Q.pek_thi_war_sit = 'ongoing'; 
+Q.oil_crisis_mer = 'minor';
+Q.oil_crisis_global = 'minor';
+Q.global_eco = 'stable';
+Q.global_trade = 'mildly obstructed';
+
+// International modivers  
+Q.vyl_rev_strenth = 0;
 Q.kell_strenth = 0;
 
 Q.rearmament_exposed = 0;
