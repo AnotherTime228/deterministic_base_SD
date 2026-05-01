@@ -552,7 +552,7 @@ Q.thi_rev_sit = 'social unrest';
 Q.pek_thi_war_sit = 'ongoing'; 
 Q.oil_crisis_mer = 'minor';
 Q.oil_crisis_global = 'minor';
-Q.global_eco = 'stable';
+Q.global_eco = '<span style="color: #81C784;">stable</span>';
 Q.global_trade = 'mildly obstructed';
 
 // International modivers  
