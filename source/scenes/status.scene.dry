@@ -94,6 +94,7 @@ Support for the Socialism: [+ socialism_disp +]%
 
 Support for the Nationalism: [+ nationalism_disp +]%
 
+Radicalisation of the Nation: [+ radicalisation_disp +]%
 
 @politics
 
@@ -308,7 +309,7 @@ Rural Unrest: [+ rural_unrest : unrest +]
 
 = Labour Reforms
 
-Labour Unions Status: [+ labour_sta +]
+Labour Unions Status: [? if minority = 0 : <span style="color: #ce2e25;">Banned</span> ?][? if minority = 1 : <span style="color: #ce5a25;">Restricted</span> ?][? if minority = 2 : Legal ?][? if minority = 3 : <span style="color: #92e43f;">Empowered</span> ?][? if minority >= 4 : <span style="color: #9ece25;">Syndicalist</span> ?]
 
 Work Councils: [? if work_council = 0 : <span style="color: #787878;">Nonexistent</span> ?][? if work_council = 1 : <span style="color: #d2ce5e;">Influencial</span> ?][? if work_council = 2 : <span style="color: #abd346;">Empowered</span> ?][? if work_council = 3 : <span style="color: #92e43f;">Syndicalist</span> ?][? if work_council = 4 : <span style="color: #3cff0f;">Full Syndicalist Economy</span> ?]
 
