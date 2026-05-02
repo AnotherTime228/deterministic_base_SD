@@ -590,9 +590,12 @@ Q.science = 0;
 Q.education_science = 0;
 
 // Tax rates relative to 1928 baseline
-Q.lower_tax_rates = 0;
-Q.upper_tax_rates = 0;
-Q.tariffs = 0;
+Q.lower_tax_rates = 4.5;
+Q.upper_tax_rates = 3.5;
+Q.corporate = 2.5;
+Q.tariffs = 4.5;
+
+Q.tax_rate = 0; // sum of all the taxes div 8
 
 Q.electoral_threshold = 0;
 
