@@ -770,7 +770,7 @@ Q.stampfer_advisor = 0; // Friedrich Stampfer
 Q.test_variable = 0;
 Q.test_variable_timer = 0;
 Q.use_decimals = 1;
-radicalisation_sum = 25;
+Q.radicalisation_sum = 26;
 
 !}
 set-bg: img/map_2.jpg
