@@ -270,7 +270,10 @@ Q.income = 1600;
 Q.inflation = 2.9;
 
 // economic growth - same source as above, Table 2 (preisbereinigt) - this is also the source for the yearly changes in the great depression.
-Q.economic_growth = 4.4;
+Q.economic_growth = 4.4; // MAIN ECONOMIC 
+
+
+
 
 // economic expansion timer
 Q.economic_expansion = 0;
@@ -547,13 +550,13 @@ Q.zurukstan = 'gurella warfare';
 Q.kell_coup_sit = 'Levion securing power';
 Q.purp_hand = 'non intervention';
 Q.vyl_rev_sit = 'social instabilty and labour crackdowns';
-Q.arctien_crisis_sit = 'Vylirian arktien revolution';
+Q.arctien_crisis_sit = 'revolution in Vylirian Arktien';
 Q.thi_rev_sit = 'social unrest';
 Q.pek_thi_war_sit = 'ongoing'; 
-Q.oil_crisis_mer = 'minor';
-Q.oil_crisis_global = 'minor';
-Q.global_eco = '<span style="color: #81C784;">stable</span>';
-Q.global_trade = 'mildly obstructed';
+Q.oil_crisis_mer = 0;
+Q.oil_crisis_global = 0;
+Q.global_eco = 0.15;
+Q.global_trade = -0.05;
 
 // International modivers  
 Q.vyl_rev_strenth = 0;
