@@ -3,7 +3,7 @@
 
 (0..12) <span style="color: #787878;">nonexistent</span>
 (12..18) <span style="color: #d42f2f;">low</span>
-(18..24) <span style="color: #FFB74D;">moderate</span>
-(24..30) <span style="color: #FFD54F;">high</span>
-(30..40) <span style="color: #81C784;">very high</span>
-(40..) <span style="color: #66BB6A;">every man a union man</span>
+(18..28) <span style="color: #FFB74D;">moderate</span>
+(28..36) <span style="color: #FFD54F;">high</span>
+(36..45) <span style="color: #81C784;">very high</span>
+(45..) <span style="color: #66BB6A;">every man a union man</span>
