@@ -2,8 +2,8 @@ title: Union Rally
 new-page: true
 max-visits: 36
 is-card: true
-view-if: org_rally_timer <= 0 and unions_independent = 0 and labor_strength >= 30
-on-arrival: month_actions += 1; org_rally_timer += 10
+view-if: spd_in_government = 0
+on-arrival: month_actions += 1; gov_possition_timer += 11
 card-image: img/union_rally.jpg
 frequency: 100
 tags: party_affairs
