@@ -461,13 +461,13 @@ Q.spm_in_government = 0;
 Q.asum_in_government = 0;
 Q.nsdap_in_government = 0;
 
-Q.in_liberal_coalition = 0; // Liberal coalition = FVP + GDSU + LDP
+Q.in_liberal_coalition = 1; // Liberal coalition = FVP + GDSU + LDP + PPU
 Q.in_center_right_coalition = 0; // Center-Right coalition = GDSU + LDP + PPU + others + MNVP
 Q.in_right_coalition = 0; // Right coalition = LDP + PPU + others + MNVP
 Q.in_weimar_coalition = 0; // Weimar coalition = VDSPM + FVP + GDSU
 Q.in_popular_front = 0; // Popular front = KPM + VDSPM + FVP + GDSU
 Q.in_progresive_coalition = 0; // Progresive coalition = KPM + VDSPM + FVP 
-Q.in_grand_coalition = 0; // Grand coalition = VDSPM + FVP + GDSU + LDP
+Q.in_grand_coalition = 0; // Grand coalition = VDSPM + FVP + GDSU + LDP + PPU
 Q.in_left_front = 0; // left coalition = KPM + VDSPM
 
 // emergency government containing the SPD: only president Braun can do this.
