@@ -80,7 +80,7 @@ Mass rallies are a main feature of any kind of political life, but as <span styl
 - @easy_discard
 
 @class_struggle
-on-arrival: workers_spd += 3*(1-dissent)*(organisation_workers/20);; unemployed_spd += 2*(1-dissent) if (left_strength + revolutionaries_strength) > (reformist_strength + center_strength/2); workers_spd += 2*(1-dissent) if (left_strength + revolutionaries_strength) > (reformist_strength + center_strength/2); left_strength += 5; left_dissent -= 5; revolutionaries_strength += 5; revolutionaries_dissent -= 5; reformist_strength -= 3; reformist_dissent += 3; old_middle_spd -= 3; new_middle_spd -= 2;
+on-arrival: workers_spd += 3*(1-dissent)*(organisation_workers/20); unemployed_spd += 2*(1-dissent) if (left_strength + revolutionaries_strength) > (reformist_strength + center_strength/2); workers_spd += 2*(1-dissent) if (left_strength + revolutionaries_strength) > (reformist_strength + center_strength/2); left_strength += 5; left_dissent -= 5; revolutionaries_strength += 5; revolutionaries_dissent -= 5; reformist_strength -= 3; reformist_dissent += 3; old_middle_spd -= 3; new_middle_spd -= 2;
 
 Our message of class struggle appeals to the left wing of the working class, while potentially alienating the middle class. What is the secondary theme of this rally?
 
