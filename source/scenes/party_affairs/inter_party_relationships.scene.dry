@@ -14,9 +14,10 @@ The <span style="color: #dc0100;">**[+ spd_name +]**</span> cannot govern by its
 
 - @liberals: Strengthen our bonds with the left-liberal <span style="color: #ddd500;">Progresive Peope's Party</span>.
 - @center: Strengthen our bonds with the <span style="color: #48b94a;">Gecherdist Democratic Social Union</span>.
+- @ppu: Meybe the minority party <span style="color: #4a9fde;">PPU</span> can provie a valube center ally?.
 - @center2: Maybe we can try to reconcliate with the <span style="color: #caa58b;">Liberal-Democrats</span>?
 - @kpd: Work towards repairing relationships with our splinter parties.
-- @spd_alone: The VDSPM can stand alone for now.
+- @spd_alone: The <span style="color: #dc0100;">[+ spd_name +]</span> can stand alone for now.
 - @easy_discard
 
 
@@ -37,19 +38,27 @@ on-arrival: resources -= 1; liberal_reconciliation += 1; gdsu_left += 1
 go-to: center_reform if gdsu_ideology < 0; center_coalition if gdsu_ideology > 0; center_op if gdsu_ideology = 0
 
 @center_op
-on-arrival: z_relation += 5*(1 - dissent)*(gdsu_modifer/10)
+on-arrival: z_relation += 5.5*(1 - dissent)*(gdsu_modifer/10)
 
-GDSU was one of the founding partes of the Federation and they are commited to democrasy, as well as many social policies, that makes them a potential ally of us. 
+<span style="color: #48b94a;">GDSU</span> was one of the founding partes of the Federation and they are commited to democrasy, as well as many social policies, that makes them a potential ally of us. 
 
 @center_coalition
-on-arrival: z_relation += 6*(1 - dissent)*(gdsu_modifer/10)
+on-arrival: z_relation += 6.5*(1 - dissent)*(gdsu_modifer/10)
 
-The left wing leadership of the GDSU suports some form of cooperation with us, so goodwill between our partes can grow.
+The left wing leadership of the <span style="color: #48b94a;">GDSU</span> suports some form of cooperation with us, so goodwill between our partes can grow.
 
 @center_reform
-on-arrival: z_relation += 4*(1 - dissent)*(gdsu_modifer/10)
+on-arrival: z_relation += 4.5*(1 - dissent)*(gdsu_modifer/10)
 
-Even with the right governing the GDSU it doesn't mean we cannot try to get them to cooperate with us.
+Even with the right governing the <span style="color: #48b94a;">GDSU</span> it doesn't mean we cannot try to get them to cooperate with us.
+
+@ppu
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; liberal_reconciliation += 1; ppu_relation += 5.5*(1 - dissent)
+
+The minorty <span style="color: #4a9fde;">PPU</span> has mosty been against the <span style="color: #dc0100;">socialist</span> rule but they prefer us over the far right.
 
 @center2
 subtitle: -1 resources
@@ -59,30 +68,27 @@ on-arrival: resources -= 1; liberal_reconciliation += 2; ldp_left += 1; dvp_rela
 go-to: lpd_reforma if ldp_reform = 1; ldp_coalition if blpm_formed = 1; lpd_op if ldp_reform = 0 and blpm_formed = 0
 
 @lpd_op
-on-arrival: dvp_relation += 5*(1 - dissent)*(ldp_modifer/10)
+on-arrival: dvp_relation += 5.5*(1 - dissent)*(ldp_modifer/10)
 
-LDP has been a vocal oposition against socialists in the Rejonsket, but we may change their mind.
+<span style="color: #caa58b;">LDP</span> has been a vocal oposition against socialists in the Rejonsket, but we may change their mind.
 
 @ldp_coalition
-on-arrival: blpm_relation += 6*(1 - dissent); dvp_relation += 3*(1 - dissent)
+on-arrival: blpm_relation += 6.5*(1 - dissent); dvp_relation += 3*(1 - dissent)
 
-The newly created BLPM is much more open to cooperation with us, so improving relations comes naturally.
+The newly created <span style="color: #00e8ff;">BLPM</span> is much more open to cooperation with us, so improving relations comes naturally.
 
 @lpd_reforma
-on-arrival: dvp_relation += 5*(1 - dissent)*(ldp_modifer/10)
+on-arrival: dvp_relation += 5.5*(1 - dissent)*(ldp_modifer/10)
 
-Even thou LDP is still a majority center-right party, after the reforms it is now a bit more open to cooperation with us.
+Even thou <span style="color: #caa58b;">LDP</span> is still a majority center-right party, after the reforms it is now a bit more open to cooperation with us.
 
 @liberals
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; liberal_reconciliation += 1; ddp_relation += 6*(1 - dissent)*(fvp_modifer/10)
-go-to: fvp_relation
 
-@fvp_relation
-
-The FVP has been one of the only parties that tried to cooperate with us throughout the years, they may prove to be a valube ally.
+The <span style="color: #ddd500;">FVP</span> has been one of the only parties that tried to cooperate with us throughout the years, they may prove to be a valube ally.
 
 @spd_alone
 
