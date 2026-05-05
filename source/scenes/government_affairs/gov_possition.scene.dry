@@ -2,7 +2,7 @@ title: Our Position Towards the Government
 new-page: true
 max-visits: 36
 is-card: true
-view-if: spd_in_government = 0
+view-if: spd_in_government = 0 and gov_possition_timer = 0
 on-arrival: month_actions += 1; gov_possition_timer += 12
 card-image: img/goverment.jpg
 frequency: 100
@@ -10,7 +10,7 @@ tags: govt_affairs
 
 = Our Position Towards the Government 
 
-As a opposition party we must make our position towards the govermnet clear. [? if in_liberal_coalition = 1: The Liberal Government since its existence has viewed us their main enemy ?][? if in_center_right_coalition = 1: The new Center-Right Government is even more hostile to us than the liberals before them ?][? if in_right_coalition = 1: The new Right Government is even more hostile to us than the liberals before them ?]. What should be our main stance towards them.
+As a opposition party we must make our position towards the govermnet clear. [? if in_liberal_coalition = 1: The Liberal Government since its existence has viewed us their main enemy. ?][? if in_center_right_coalition = 1: The new Center-Right Government is even more hostile to us than the liberals before them. ?][? if in_right_coalition = 1: The new Right Government is even more hostile to us than the liberals before them. ?] What should be our main stance towards them.
 
 - @workers: We should stand as the firmest oppostion to them, and attack them at every possible opporunity.
 - @new_middle: We should be pragmatic and maintain our strong opposition but do not close ourselves to possible reconciliation. 
