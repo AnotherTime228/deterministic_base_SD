@@ -12,13 +12,13 @@ max-visits: 4
 
 The <span style="color: #dc0100;">**[+ spd_name +]**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
 
-[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?] 437dfa dee03a
+[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
 
 - @class_struggle: We should strenthen the <span style="color: #940000;">**SAPM**</span> voice in the party - Class struggle and preparing the proletariat for the revolution are our primary goals.
 - @peoples_front: The true strenth comes form the unity of the workers, peasants and farmes aginst the Burgoise and the Aristocrasy.
 - @labor: The party's main goal should be to organise the workers and to work towards true class awakening.
 - @centrist: The Center <span style="color: #b30e0e;">Marxists</span> of Wilhelm Serindorf remains the best way to resolve our internal contradictions and balancing out the extremes of our party.
-- @reform: Following Henrich Alder, we should work for ethical <span style="color: #d61818;">socialism</span>, strengthen <span style="color: #437dfa;"democracy</span>, and expand the party's electorate.
+- @reform: Following Henrich Alder, we should work for ethical <span style="color: #d61818;">socialism</span>, strengthen <span style="color: #437dfa;">democracy</span> and expand the party's electorate.
 - @easy_discard
 
 @class_struggle
