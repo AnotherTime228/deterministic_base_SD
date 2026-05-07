@@ -28,10 +28,10 @@ Attacking the far right is popular among the entire party, although the left con
 @nsdap
 on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; reformist_strength += 5; nazi_urgency += 1; workers_nsdap -= 4; rural_nsdap -= 1; peasants_nsdap -= 1;
 
-[? if nazi_urgency == 0 or nsdap_r < 10 : The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 0 and nsdap_r >= 10 : The Nazis are the most urgent problem for us to deal with. ?]
+[? if nazi_urgency < 2 or nsdap_r < 10 : The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 1 and nsdap_r >= 10 : The Nazis are the most urgent problem for us to deal with. ?]
 
 @bourgeois
-on-arrival: enemies = "bourgeois parties"; left_strength += 4; left_dissent -= 2; revolutionaries_strength += 8; revolutionaries_dissent -= 10; dvp_relation -= 6; ddp_relation -= 5; z_relation -= 5; reformist_dissent += 8; workers_z -= 2; workers_dvp -= 3; workers_ddp -= 2;
+on-arrival: enemies = "bourgeois parties"; left_strength += 4; left_dissent -= 2; revolutionaries_strength += 8; revolutionaries_dissent -= 10; dvp_relation -= 6*ldp_modifer ; ddp_relation -= 5*fvp_modifer ; z_relation -= 5*gdsu_modifer ; reformist_dissent += 8; workers_z -= 2; workers_dvp -= 3; workers_ddp -= 2;
 
 Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions that are necessary for government in the future.
 
