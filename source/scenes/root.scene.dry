@@ -149,9 +149,9 @@ Q.gdsu_ideology = 0; // +++ its more left wing --- is more right wing
 
 Q.fvp_path = 0; // 0 - centre, 1 -  left, 2 - right
 
-Q.fvp_modifer = 10;
-Q.ldp_modifer = 10;
-Q.gdsu_modifer = 10;
+Q.fvp_modifer = 1;
+Q.ldp_modifer = 1;
+Q.gdsu_modifer = 1;
 
 // inter-party relations
 
@@ -260,7 +260,7 @@ Q.old_middle = 16; // "old mittelstand"
 Q.new_middle = 17; // "new mittelstand"
 Q.rural = 13; // agriculture and forestry employment
 Q.peasants = 15;
-Q.unemployed = 7;
+Q.unemployed = 5.4;
 Q.catholics = 25;
 Q.minorieties = 12;
 
@@ -483,6 +483,11 @@ Q.in_minority_government = 0;
 Q.coalition_dissent = 0;
 // dissent from the KPD, in a popular front or left front government
 Q.kpd_coalition_dissent = 0;
+
+// COALITION DISSISNET
+
+Q.lib_dissident = 0;
+Q.right_dissidnet = 0;
 
 // does the SPD tolerate the government even if it is not a participant?
 Q.spd_toleration = 0;
