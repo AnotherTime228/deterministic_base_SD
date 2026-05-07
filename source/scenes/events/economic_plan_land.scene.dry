@@ -36,7 +36,7 @@ on-arrival: land_plan = 2; agrarnians_strength += 9; agrarnians_dissent -= 10; c
 subtitle: Our reformis plan allows us to support traditional land reform.
 unavailable-subtitle: The economic plan is too radical enough to support such a action.
 choose-if: economic_plan = 1
-on-arrival: land_plan = 1; agrarnians_strength -= 5; agrarnians_dissent += 5; revolutionaries_dissent += 5; reformist_strength += 10; reformist_dissent -= 10; ddp_relation += 4; z_relation += 4;
+on-arrival: land_plan = 1; agrarnians_strength -= 5; agrarnians_dissent += 5; revolutionaries_dissent += 5; reformist_strength += 10; reformist_dissent -= 10; ddp_relation += 4*fvp_modifer ; z_relation += 4*gdsu_modifer ;
 
 @ignore
 on-arrival: agrarnians_strength -= 20; agrarnians_dissent += 25
