@@ -805,7 +805,7 @@ For more information on the politics and government of the Merkopian Federation,
 - @1928_historical: Begin (historical mode) *Hard Mode*
 
 @1928_easy
-on-arrival: difficulty = -2; resources = 5; dues = 5; z_relation = 45; dvp_relation = 40; budget = 5; Q.fvp_modifer = 1.1; Q.ldp_modifer = 1.1; Q.gdsu_modifer = 1.1;
+on-arrival: difficulty = -2; resources = 5; dues = 5; z_relation = 45; dvp_relation = 40; budget = 5; fvp_modifer = 1.1; ldp_modifer = 1.1; gdsu_modifer = 1.1;
 go-to: 1928_main
 
 @1928_historical
