@@ -62,7 +62,7 @@ subtitle: -1 resources
 view-if: vyl_rev = 0
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; vyl_rev_strenth += 1; organisation_workers += 1; labor_strength += 4; center_strength += 2
+on-arrival: resources -= 1; vyl_rev_strenth += 1; organisation_workers += 1; labor_strength += 4; center_strength += 2; vyliria_left_relation += 1;
 
 Vyliarians are the masters at organising their proletarians, we shall learn their ways of proper organisation and support our Socialist brothers 
 
@@ -71,7 +71,7 @@ subtitle: -1 resources
 view-if: vyl_rev = 1 and vyl_suc = 0
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; vyl_rev_strenth += 2; revolutionaries_strength += 8; left_strength += 4; vyliria_relation += 1; radicalization += 1; liberal_reconciliation -= 1
+on-arrival: resources -= 1; vyl_rev_strenth += 2; revolutionaries_strength += 8; left_strength += 4; vyliria_left_relation += 1; radicalization += 1; liberal_reconciliation -= 1
 
 We are helping the revolutionaries in Vyliria, our left factions are appeased and strenthend, maybe the revolution can succed?  
 
@@ -80,7 +80,7 @@ subtitle: -1 resources
 view-if: vyl_suc = 1
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; vyliria_relation += 1
+on-arrival: resources -= 1; vyliria_left_relation += 1
 
 Now that the Vylirian revoulutionaries are victorus we can use our intnational contacts to our advatage 
 
