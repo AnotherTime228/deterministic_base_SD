@@ -123,13 +123,52 @@ Our speakers defend the <span style="color: #dee03a;">republican</span> system a
 @wtb
 view-if: economic_plan > 0
 on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+go-to: radical if economic_plan = 3; moderate if economic_plan = 2; reformist if economic_plan = 1
+
+@radical
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
 
 We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
 
-- @union: Support the unions and work to expand union membership.
-- @agrarian: Tackle the rural issues and possibly reach the rural population,
-- @campain: Campaning for the party and brothen our support.
-- @fund: Fundrasing for the party.
+go-to: takeover if land_plan = 4; collectivisation if land_plan = 3
+
+@moderate
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+go-to: collectivisation_2 if land_plan = 2; collectivisation if land_plan = 3
+
+@reformist
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+go-to: land_reform if land_plan = 1; collectivisation_2 if land_plan = 2
+
+// rural
+
+@takeover
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+@collectivisation
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+@collectivisation_2
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+@land_reform
+on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 2*(1-dissent); 
+
+We support our economic plan and push foward our way to reslove this economic crisis. What is the secondary theme of this rally?
+
+// Secondary
 
 @union
 on-arrival: workers_spd += 2*(1-dissent); organisation_workers += 1; labor_strength += 3
