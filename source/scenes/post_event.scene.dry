@@ -313,11 +313,11 @@ Q.economic_growth = Q.economic_growth + Q.economic_change;
         Q.pro_republic -= 1;
     }
 
-// DYNAMIC CHANGES 
+    //////////////////////////// DYNAMIC CHANGES 
 
-if (year == 1267 and month == 4) {
-Q.lib_dissident += 20;
-}
+    if (year == 1267 && month == 4) {
+    Q.lib_dissident += 20;
+    }
 
 
 
