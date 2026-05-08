@@ -19,26 +19,25 @@ What should be our official responce to his death?
 - @parliment: Order our parlimentary delegation to offcialy commemorate his death in the chambers of the Caversket.
 - @statment: Send a delegation to his funeral to commemorate his death.
 - @statment_2: Relese a official statment commemorating his death.
-- @everyone: Ignore
+- @everyone: Ignore this event and use it to undermine the position of the <span style="color: #48b94a;">GDSU</span>.
 
 @parliment
 on-arrival: new_middle_z += 1; workers_z += 1; peasants_z += 1; pro_republic += 1; rural_z += 1; catholics_z += 1; gdsu_left += 2; z_relation += 5*gdsu_modifer; ddp_relation += 2*fvp_modifer; dvp_relation += 2*ldp_modifer; revolutionaries_dissent += 6; left_dissent += 6; center_dissent += 2; reformist_strength += 5; liberal_reconciliation += 1;
 
-When we ban the film, the Nazis immediately celebrate it as a major victory; they claim that even the red Marxists agree with them! It is a major boost to their morale.
-
+Our delegation asks for a minute of silence during the next Caversket session. It is suprising seeing <span style="color: #d61818;">socialists</span> go this far to commemorate a religous man, this raises may eyebrows not only of the <span style="color: #48b94a;">GDSU</span>, but also our own party members. It may be a breakthrough in our relations with the <span style="color: #48b94a;">GDSU</span>.
 
 @statment
-on-arrival: nationalism += 3; old_middle_nsdap += 4; new_middle_nsdap += 3; workers_nsdap += 1; sa_strength += 15; pro_republic -= 3; strife += 1
+on-arrival: workers_z += 1; rural_z += 1; catholics_z += 1; gdsu_left += 2; z_relation += 3*gdsu_modifer; revolutionaries_dissent += 2; left_dissent += 2; reformist_strength += 3; 
 
-While we allow the film, showings are marred by violence. Showings of the film eventually stop, and the Nazis claim victory.
+Our delegation shows thier greatest respects during the funeral of the passed father of the <span style="color: #48b94a;">Federation</span>. It may be a breakthrough in our relations with the <span style="color: #48b94a;">GDSU</span>.
 
 
 @statment_2
-on-arrival: nationalism -= 4; pro_republic += 4*(1-dissent); strife += 1
+on-arrival: gdsu_left += 1; z_relation += 1.5*gdsu_modifer; center_dissent -= 2; center_strength += 2;
 
-Under the protection of the police, the people are allowed to watch the film in peace. Nazi disturbances are kept to a minimum.
+Our statment is a safe opition, it doesn't alienate anyone, it shows respect to the passed, but it doesn't gain us any new allies. 
 
 @everyone
-on-arrival: nationalism -= 5; pro_republic += 5*(1-dissent); workers_nsdap -= 3; unemployed_nsdap -= 3; new_middle_nsdap -= 3
+on-arrival: workers_spd += 1; catholics_spd += 1; z_relation -= 4*gdsu_modifer; revolutionaries_dissent -= 4; left_dissent -= 4; revolutionaries_strength += 3; left_strength += 3; reformist_dissent += 6; reformist_strength -= 6; 
 
-Under police protection, crowds throng the film's showings, as Nazis protest outside.
+Affaris of a rival party are none of our intrest, Jager betrayed the *Zeltbrin Coalition* and he shouldn't be commemorated by us. 
