@@ -5,7 +5,7 @@ on-arrival: para_funding_timer = 7; month_actions += 1;
 frequency: 300
 is-card: true
 card-image: img/para_fund.jpg
-tags: para_affairs
+tags: paramilitary
 
 = Paramilitary Funding
 
