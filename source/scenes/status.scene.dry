@@ -54,11 +54,11 @@ Reichstag composition:
 
 [? if sapd_formed != 0 and asum_formed != 0 : <span class="tooltip-text" title="Socialdemocratic Party of Merkopia" style="color: #dc0200;">**SPM**</span>: [+ spd_r +]% ?]
 
-[? if sapd_formed != 0 and asum_formed != 0 and spm_formed != 0 : <span class="tooltip-text" title="Socialdemocratic Party of Merkopia" style="color: #dc0200;">**ISPM**</span>: [+ spd_r +]% ?]
+[? if sapd_formed != 0 and asum_formed != 0 and spm_formed != 0 : <span class="tooltip-text" title="Independent Socialdemocratic Party of Merkopia" style="color: #dc0200;">**ISPM**</span>: [+ spd_r +]% ?]
 
 [? if sapd_formed = 0 and spm_formed = 0: <span class="tooltip-text" title="United Democratic Socialist Party of Merkopia" style="color: #dc0200;">**VDSPM**</span>: [+ spd_r +]% ?]
 
-[? if spm_formed != 0 and sapd_formed = 0 : <span class="tooltip-text" title="United Democratic Socialist Party of Merkopia" style="color: #dc0200;">**SAPM**</span>: [+ spd_r +]% ?]
+[? if spm_formed != 0 and sapd_formed = 0 : <span class="tooltip-text" title=" Socialist Revolutionary Party of Merkopia" style="color: #dc0200;">**SRPM**</span>: [+ spd_r +]% ?]
 
 [? if spm_formed and spm_r > 0: <span class="tooltip-text" title="Communist Party of Merkopia" style="color: #ff1919;">SPM</span>: [+ sapd_r +]% ?]
 
@@ -112,9 +112,9 @@ Radicalisation of the Nation: [+ radicalisation_disp +]%
 
 [? if spm_formed and spm_r > 0: <span class="tooltip-text" title="Agrarian-social union of Merkopia" style="color: #ff1919;">SPM</span>: [+ spm_relation : relationships +] ?]
 
-{!<span class="tooltip-text" title="Gecherdist Democratic Social Union" style="color: #48b94a;">GDSU</span>!}: [+ z_relation : relationships +]
-
 {!<span class="tooltip-text" title="Progressive People's Party" style="color: #ddd500;">FVP</span>!}: [+ ddp_relation : relationships +]
+
+{!<span class="tooltip-text" title="Gecherdist Democratic Social Union" style="color: #48b94a;">GDSU</span>!}: [+ z_relation : relationships +]
 
 [? if blpm_formed and gnvp_r > 0: <span class="tooltip-text" title="Federal Liberal Party of Merkopia" style="color: #00e8ff;">BLPM</span>: [+ blpm_relation : relationships +] ?]
 
@@ -136,9 +136,9 @@ Radicalisation of the Nation: [+ radicalisation_disp +]%
 
 [? if spm_formed and spm_r > 0: <span class="tooltip-text" title="Agrarian-social union of Merkopia" style="color: #ff1919;">SPM</span>: [+ spm_leader +] ?]
 
-{!<span class="tooltip-text" title="Gecherdist Democratic Social Union" style="color: #48b94a;">GDSU</span>!}: [+ z_leader +]
-
 {!<span class="tooltip-text" title="Progressive People's Party" style="color: #ddd500;">FVP</span>!}: [+ ddp_leader +]
+
+{!<span class="tooltip-text" title="Gecherdist Democratic Social Union" style="color: #48b94a;">GDSU</span>!}: [+ z_leader +]
 
 [? if blpm_formed and gnvp_r > 0: <span class="tooltip-text" title="Federal Liberal Party of Merkopia" style="color: #00e8ff;">BLPM</span>: [+ blpm_leader +] ?]
 
@@ -175,6 +175,9 @@ if (Q.rb_strength) {
 if (Q.rfb_strength) {
     Q.rfb_strength_2 = Q.rfb_strength.toFixed(1);
 }
+if (Q.dff_strength) {
+    Q.dff_strength_2 = Q.dff_strength.toFixed(1);
+}
 if (Q.sh_strength) {
     Q.sh_strength_2 = Q.sh_strength.toFixed(1);
 }
@@ -185,25 +188,25 @@ if (Q.sa_strength) {
 
 = Paramilitaries
 
-<span class="tooltip-text" title="The RFB (Rotfrontkämpferbund) is a communist group associated with the KPD." style="color: #8B0000;">**RFB**</span> Strength: [+ rfb_strength_2 +] thousand
+<span class="tooltip-text" title="The RGF (*Rote Gardefront*) is a paramilitray/revolutionary group associated with the left wing of the socialist movemnet and the old SAPM" style="color: #8B0000;">**RGF**</span> Strength: [+ rfb_strength_2 +] thousand
 
-<span style="color: #8B0000;">**RFB**</span> Militarization: [+ rfb_militancy : militancy +]
+<span style="color: #8B0000;">**RGF**</span> Militarization: [+ rfb_militancy : militancy +]
 
-<span class="tooltip-text" title="The Reichsbanner Schwarz-Rot-Gold is a popular organization for defending democracy, mostly affiliated with the SPD." style="color: #c00000;">**Reichsbanner**</span> Strength: [+ rb_strength_2 +] thousand
+<span class="tooltip-text" title="The *Demokratische Sozialfront* is a organization for democracy and socialism mostly affiliated with the old SPM." style="color: #c00000;">**DSF**</span> Strength: [+ rb_strength_2 +] thousand
 
 <span style="color: #c00000;">**Reichsbanner**</span> Militarization: [+ rb_militancy : militancy +]
 
-<span class="tooltip-text" title="The RFB (Rotfrontkämpferbund) is a communist group associated with the KPD." style="color: #8B0000;">**RFB**</span> Strength: [+ rfb_strength_2 +] thousand
+<span class="tooltip-text" title="The *Demokratisch-Federales Volksbanner* is a Liberal/Democratic group associated organization for defending democracy, mostly affiliated with the FVP and the LDP." style="color: #bdc56c;">**DFVB**</span> Strength: [+ df_strength_2 +] thousand
 
-<span style="color: #8B0000;">**RFB**</span> Militarization: [+ rfb_militancy : militancy +]
+<span style="color: #bdc56c;">**DFVB**</span> Militarization: [+ df_strength_2 : militancy +]
 
 <span class="tooltip-text" title="The Stahlhelm is a right-wing organization of war veterans associated with the MNVP." style="color:#3F7BC1;">**Stahlhelm**</span> Strength: [+ sh_strength_2 +] thousand
 
 <span style="color: #3F7BC1;">**Stahlhelm**</span> Militarization: [+ sh_militancy : militancy +]
 
-<span class="tooltip-text" title="The SA (Sturmabteilung) is the Nazi paramilitary." style="color: #7A3C00;">**SA**</span> Strength: [+ sa_strength_2 +] thousand
+<span class="tooltip-text" title="The SA (Sturmabteilung) is the Nazi paramilitary." style="color: #7e6f61;">**SA**</span> Strength: [+ sa_strength_2 +] thousand
 
-<span style="color: #7A3C00;">**SA**</span> Militarization: [+ sa_militancy : militancy +]
+<span style="color: #7e6f61;">**SA**</span> Militarization: [+ sa_militancy : militancy +]
 
 = Official military/paramilitaries
 
@@ -251,21 +254,21 @@ Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
 
 **Detailed results for each demographic**
 
-Workers: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ workers_spd_display +]%, GDVU: [+ workers_z_display +]%, PPU+: [+ workers_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ workers_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ workers_dvp_display +]%, MNVP: [+ workers_dnvp_display +]%, NSDAP: [+ workers_nsdap_display +]%, Others: [+ workers_other_display +]%, [? if sapd_formed: KPM: [+ workers_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ workers_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ workers_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ workers_blpm_display +]%, ?] [? if spm_formed: SPM: [+ workers_spm_display +]%, ?]
+Workers: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ workers_spd_display +]%, GDSU: [+ workers_z_display +]%, PPU+: [+ workers_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ workers_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ workers_dvp_display +]%, MNVP: [+ workers_dnvp_display +]%, NSDAP: [+ workers_nsdap_display +]%, Others: [+ workers_other_display +]%, [? if sapd_formed: KPM: [+ workers_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ workers_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ workers_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ workers_blpm_display +]%, ?] [? if spm_formed: SPM: [+ workers_spm_display +]%, ?]
 
-New Middle Class: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ new_middle_spd_display +]%, GDVU: [+ new_middle_z_display +]%, PPU+: [+ new_middle_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ new_middle_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ new_middle_dvp_display +]%, MNVP: [+ new_middle_dnvp_display +]%, NSDAP: [+ new_middle_nsdap_display +]%, Others: [+ new_middle_other_display +]%, [? if sapd_formed: KPM: [+ new_middle_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ new_middle_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ new_middle_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ new_middle_blpm_display +]%, ?] [? if spm_formed: SPM: [+ new_middle_spm_display +]%, ?]
+New Middle Class: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ new_middle_spd_display +]%, GDSU: [+ new_middle_z_display +]%, PPU+: [+ new_middle_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ new_middle_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ new_middle_dvp_display +]%, MNVP: [+ new_middle_dnvp_display +]%, NSDAP: [+ new_middle_nsdap_display +]%, Others: [+ new_middle_other_display +]%, [? if sapd_formed: KPM: [+ new_middle_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ new_middle_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ new_middle_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ new_middle_blpm_display +]%, ?] [? if spm_formed: SPM: [+ new_middle_spm_display +]%, ?]
 
-Old Middle Class: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ old_middle_spd_display +]%, GDVU: [+ old_middle_z_display +]%, PPU+: [+ old_middle_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ old_middle_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ old_middle_dvp_display +]%, MNVP: [+ old_middle_dnvp_display +]%, NSDAP: [+ old_middle_nsdap_display +]%, Others: [+ old_middle_other_display +]%, [? if sapd_formed: KPM: [+ old_middle_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ old_middle_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ old_middle_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ old_middle_blpm_display +]%, ?] [? if spm_formed: SPM: [+ old_middle_spm_display +]%, ?]
+Old Middle Class: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ old_middle_spd_display +]%, GDSU: [+ old_middle_z_display +]%, PPU+: [+ old_middle_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ old_middle_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ old_middle_dvp_display +]%, MNVP: [+ old_middle_dnvp_display +]%, NSDAP: [+ old_middle_nsdap_display +]%, Others: [+ old_middle_other_display +]%, [? if sapd_formed: KPM: [+ old_middle_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ old_middle_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ old_middle_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ old_middle_blpm_display +]%, ?] [? if spm_formed: SPM: [+ old_middle_spm_display +]%, ?]
 
-Rural: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ rural_spd_display +]%, GDVU: [+ rural_z_display +]%, PPU+: [+ rural_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ rural_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ rural_dvp_display +]%, MNVP: [+ rural_dnvp_display +]%, NSDAP: [+ rural_nsdap_display +]%, Others: [+ rural_other_display +]% [? if sapd_formed: KPM: [+ rural_sapd_display +]% ?], [? if gnvp_formed: GNVP: [+ rural_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ rural_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ rural_blpm_display +]%, ?] [? if spm_formed: SPM: [+ rural_spm_display +]%, ?]
+Rural: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ rural_spd_display +]%, GDSU: [+ rural_z_display +]%, PPU+: [+ rural_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ rural_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ rural_dvp_display +]%, MNVP: [+ rural_dnvp_display +]%, NSDAP: [+ rural_nsdap_display +]%, Others: [+ rural_other_display +]% [? if sapd_formed: KPM: [+ rural_sapd_display +]% ?], [? if gnvp_formed: GNVP: [+ rural_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ rural_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ rural_blpm_display +]%, ?] [? if spm_formed: SPM: [+ rural_spm_display +]%, ?]
 
-Peasants: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ peasants_spd_display +]%, GDVU: [+ peasants_z_display +]%, PPU+: [+ peasants_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ peasants_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ peasants_dvp_display +]%, MNVP: [+ peasants_dnvp_display +]%, NSDAP: [+ peasants_nsdap_display +]%, Others: [+ peasants_other_display +]%, [? if sapd_formed: KPM: [+ peasants_sapd_display +]% ?] [? if gnvp_formed: GNVP: [+ peasants_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ peasants_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ peasants_blpm_display +]%, ?] [? if spm_formed: SPM: [+ peasants_spm_display +]%, ?]
+Peasants: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ peasants_spd_display +]%, GDSU: [+ peasants_z_display +]%, PPU+: [+ peasants_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ peasants_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ peasants_dvp_display +]%, MNVP: [+ peasants_dnvp_display +]%, NSDAP: [+ peasants_nsdap_display +]%, Others: [+ peasants_other_display +]%, [? if sapd_formed: KPM: [+ peasants_sapd_display +]% ?] [? if gnvp_formed: GNVP: [+ peasants_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ peasants_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ peasants_blpm_display +]%, ?] [? if spm_formed: SPM: [+ peasants_spm_display +]%, ?]
 
-Unemployed: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ unemployed_spd_display +]%, Z: [+ unemployed_z_display +]%, PPU+: [+ unemployed_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ unemployed_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ rural_dvp_display +]%, MNVP: [+ unemployed_dnvp_display +]%, NSDAP: [+ unemployed_nsdap_display +]%, Others: [+ unemployed_other_display +]%, [? if sapd_formed: KPM: [+ unemployed_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ unemployed_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ unemployed_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ unemployed_blpm_display +]%, ?] [? if spm_formed: SPM: [+ unemployed_spm_display +]%, ?]
+Unemployed: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ unemployed_spd_display +]%, GDSU: [+ unemployed_z_display +]%, PPU+: [+ unemployed_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ unemployed_ddp_display +]%, [? if not dvp_name: DDP?][? if dvp_name != 0 : [+ dvp_name +]?]: [+ rural_dvp_display +]%, MNVP: [+ unemployed_dnvp_display +]%, NSDAP: [+ unemployed_nsdap_display +]%, Others: [+ unemployed_other_display +]%, [? if sapd_formed: KPM: [+ unemployed_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ unemployed_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ unemployed_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ unemployed_blpm_display +]%, ?] [? if spm_formed: SPM: [+ unemployed_spm_display +]%, ?]
 
-Gecherdists: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ catholics_spd_display +]%, Z: [+ catholics_z_display +]%, PPU+: [+ catholics_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ catholics_ddp_display +]%, DVP: [+ catholics_dvp_display +]%; MNVP: [+ catholics_dnvp_display +]%, NSDAP: [+ catholics_nsdap_display +]%, Others: [+ catholics_other_display +]% [? if sapd_formed: KPM: [+ catholics_sapd_display +]%, ?], [? if gnvp_formed: GNVP: [+ catholics_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ catholics_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ catholics_blpm_display +]%, ?] [? if spm_formed: SPM: [+ catholics_spm_display +]%, ?]
+Gecherdists: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ catholics_spd_display +]%, GDSU: [+ catholics_z_display +]%, PPU+: [+ catholics_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ catholics_ddp_display +]%, [+ dvp_name +]: [+ catholics_dvp_display +]%; MNVP: [+ catholics_dnvp_display +]%, NSDAP: [+ catholics_nsdap_display +]%, Others: [+ catholics_other_display +]% [? if sapd_formed: KPM: [+ catholics_sapd_display +]%, ?], [? if gnvp_formed: GNVP: [+ catholics_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ catholics_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ catholics_blpm_display +]%, ?] [? if spm_formed: SPM: [+ catholics_spm_display +]%, ?]
 
-Minorities: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ minorieties_spd_display +]%, Z: [+ minorieties_z_display +]%, PPU+: [+ minorieties_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ minorieties_ddp_display +]%, DVP: [+ minorieties_dvp_display +]%; MNVP: [+ minorieties_dnvp_display +]%, NSDAP: [+ minorieties_nsdap_display +]%, Others: [+ minorieties_other_display +]%, [? if sapd_formed: KPM: [+ minorieties_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ minorieties_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ minorieties_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ minorieties_blpm_display +]%, ?] [? if spm_formed: SPM: [+ minorieties_spm_display +]%, ?]
+Minorities: [? if not spd_name: DDP?][? if spd_name != 0 : [+ spd_name +]?]: [+ minorieties_spd_display +]%, GDSU: [+ minorieties_z_display +]%, PPU+: [+ minorieties_ppu_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ minorieties_ddp_display +]%, [+ dvp_name +]: [+ minorieties_dvp_display +]%; MNVP: [+ minorieties_dnvp_display +]%, NSDAP: [+ minorieties_nsdap_display +]%, Others: [+ minorieties_other_display +]%, [? if sapd_formed: KPM: [+ minorieties_sapd_display +]%, ?] [? if gnvp_formed: GNVP: [+ minorieties_gnvp_display +]%, ?] [? if asum_formed: ASUM: [+ minorieties_asum_display +]%, ?] [? if blpm_formed: BLPM: [+ minorieties_blpm_display +]%, ?] [? if spm_formed: SPM: [+ minorieties_spm_display +]%, ?]
 
 
 @politics_internal
