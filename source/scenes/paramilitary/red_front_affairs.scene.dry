@@ -3,7 +3,7 @@ new-page: true
 view-if: red_guard_timer <= 0 and sapd_formed = 0
 on-arrival: red_guard_timer += 7; month_actions += 1; rg_militarisation_cost = 2;
 is-card: true
-card-image: img/para_fund.jpg
+card-image: img/rfb_affairs.jpg
 tags: paramilitary
 max-visits: 20
 
