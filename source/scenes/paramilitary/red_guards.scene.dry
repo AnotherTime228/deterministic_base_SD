@@ -11,6 +11,8 @@ max-visits: 20
 
 The Red Guard-Front our is a paramilitary organisation affiliated with the revolutionary wing of our party (old <span style="color: #940000;">**SAPM**</span>). They serve as the strongest revolutionary push for the country and play a vital role in revolutionary preparations and more drastc operations.
 
+Should we increse our funding to the Red Guards?
+
 - @militant: Chanel more funds to support the Red Guards.
 - @militant_2: Use our existing resources to support more training for the Red Guards.
 - @same: Keep the Red Guards as it is.
@@ -21,7 +23,7 @@ The Red Guard-Front our is a paramilitary organisation affiliated with the revol
 choose-if: para_resources >= rg_militarisation_cost
 unavailable-subtitle: Not enough paramilitary resources ([+ rg_militarisation_cost +] needed).
 subtitle: -[+ rg_militarisation_cost +] paramilitary resources
-on-arrival: para_resources -= rg_militarisation_cost; rfb_investment += 2; rfb_strength += 15; rfb_militancy += 0.05; revolutionaries_strength += 4; revolutionaries_dissent -= 6; reformist_dissent += 5; radicalisation += 1
+on-arrival: para_resources -= rg_militarisation_cost; rfb_investment += 2; rfb_strength += 10; rfb_militancy += 0.03; revolutionaries_strength += 4; revolutionaries_dissent -= 6; reformist_dissent += 5; radicalisation += 1
 
 We continue funding the Red Guards, who begin recruitment of more members and are able to acquire more effective weaponry.
 
