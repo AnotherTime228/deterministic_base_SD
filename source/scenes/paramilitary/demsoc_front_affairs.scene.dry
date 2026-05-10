@@ -1,7 +1,7 @@
 title: Democratic Social Front 
 new-page: true
-view-if: red_guard_timer <= 0 and sapd_formed = 0
-on-arrival: democratic_front_timer += 7; month_actions += 1; rg_militarisation_cost = 2;
+view-if: democratic_front_affairs <= 0
+on-arrival: democratic_front_affairs += 7; month_actions += 1; rg_militarisation_cost = 2;
 is-card: true
 card-image: img/rb_affairs_2.jpg
 tags: paramilitary
