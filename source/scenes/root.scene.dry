@@ -194,13 +194,15 @@ Q.prussian_government = "Z";
 // Number of members in 1928 (in thousands)
 // Reichsbanner, 
 Q.rb_strength = 170;
-Q.rb_militancy = 0.3;
+Q.rb_militancy = 0.25;
+Q.rb_agrarian = 0;
 Q.women_in_rb = 0;
 Q.rb_banned = 0;
 
 // RFB
 Q.rfb_strength = 75;
 Q.rfb_militancy = 0.5;
+Q.rfb_agrarian = 0;
 Q.rfb_banned = 0;
 Q.rfb_banned_prussia = 0;
 
