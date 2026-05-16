@@ -382,7 +382,7 @@ There are some potential coalition arrangements.
 
 # TODO: black-brown coalition
 
-// LIBERAL
+# LIBERAL
 
 @liberal_coalition
 title: The liberal coalition can be formed. 
@@ -421,7 +421,7 @@ Liberals cannot form a working cabinet...
 
 go-to: coalition_menu
 
-// WIDE LIBERAL
+# WIDE LIBERAL
 
 @wide_liberal_coalition
 title: The liberal coalition can be formed. 
@@ -445,7 +445,7 @@ Liberals cannot form a working cabinet...
 
 go-to: coalition_menu
 
-// CENTRE-RIGHT COALITION
+# CENTRE-RIGHT COALITION
 
 @center_right_coalition
 title: The center-right coalition can form. 
@@ -484,7 +484,7 @@ Center-Right cabinet cannot form...
 
 go-to: coalition_menu
 
-// RIGHT COALITION
+# RIGHT COALITION
 
 @right_coalition
 title: The center-right coalition can form. 
@@ -513,7 +513,7 @@ The Right wing cannot form a cabinet...
 
 go-to: coalition_menu
 
-//
+#
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
@@ -718,9 +718,11 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 - @civil_war: A civil war, then.
 
 
+# NO MAJORITY
+
 @no_majority
 title: There is no clear governing majority.
-view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_failed == 1) and president = "Hindenburg" and far_right_coalition < 50
+view-if: grand_coalition < 50 or anti_democratic_coalition >= 50 or lib_failed = 1 or center_right_coalition < 50
 on-arrival: no_majority_elections += 1
 go-to: no_majority_bruning if chancellor = "Brüning" or chancellor = "Wirth"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
 
