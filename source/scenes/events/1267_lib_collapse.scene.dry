@@ -7,4 +7,6 @@ max-visits: 1
 on-arrival: time_to_election = 2; spd_in_government = 0; in_liberal_coalition = 0; in_right_coalition = 0; in_grand_coalition = 0; spd_toleration = 0; pro_republic -= 1;
 call: set_next_election_time
 
-The Liberal coalition has fallen. New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
+The Liberal coalition has fallen. The interanl bickering in the coalition primary on the topics of intervention in Zurukstan and overall militray buildup paired with the conflic over land reform bettwen the <span style="color: #ddd500;">FVP</span> and the <span style="color: #caa58b;">LDP</span> has brought down the liberal coalition for the first time. 
+
+Maybe this elctoral cycle could be a breakthrough for the <span style="color: #d61818;">Socialists</span>. New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
