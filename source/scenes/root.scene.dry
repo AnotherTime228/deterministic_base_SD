@@ -148,6 +148,7 @@ Q.gdsu_right = 2;
 Q.gdsu_left = 0;
 Q.gdsu_ideology = 0; // +++ its more left wing --- is more right wing 
 
+Q.fvp_ideology = 0;
 Q.fvp_path = 0; // 0 - centre, 1 -  left, 2 - right
 
 Q.fvp_modifer = 1;
