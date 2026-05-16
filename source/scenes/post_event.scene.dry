@@ -317,7 +317,7 @@ Q.economic_growth = Q.economic_growth + Q.economic_change;
 
 //// Liberal 
 
-    if (Q.year == 1267 && Q.month == 4) {
+    if (Q.year == 1267 && Q.month == 5) {
     Q.lib_dissident += 10;
     }
 
@@ -449,6 +449,13 @@ Q.economic_growth = Q.economic_growth + Q.economic_change;
             Q.new_middle_nsdap += 2/12;
             Q.rural_nsdap += 4/12;
             Q.workers_nsdap += 4/12;
+        }
+
+    if (Q.year == 1266) 
+        {
+        Q.old_middle_dnvp += 4/12;
+        Q.rural_dnvp += 6/12;
+        Q.sh_strength += 15/12;
         }
 
 
