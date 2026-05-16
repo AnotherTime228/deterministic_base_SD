@@ -844,7 +844,7 @@ Q.dvp_relation = 20;
 Q.fvp_modifer = 0.9;
 Q.ldp_modifer = 0.9;
 Q.gdsu_modifer = 0.9;
-Q.budget = 2;
+Q.budget = 3;
 Q.n_advisors = 4;
 
 this.state.disableSaves = true;
