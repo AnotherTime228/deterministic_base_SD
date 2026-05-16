@@ -38,6 +38,6 @@ on-arrival: gdsu_left += 1; z_relation += 1.5*gdsu_modifer; center_dissent -= 2;
 Our statment is a safe opition, it doesn't alienate anyone, it shows respect to the passed, but it doesn't gain us any new allies. 
 
 @everyone
-on-arrival: workers_spd += 1; catholics_spd += 1; z_relation -= 4*gdsu_modifer; revolutionaries_dissent -= 4; left_dissent -= 4; revolutionaries_strength += 3; left_strength += 3; reformist_dissent += 6; reformist_strength -= 6; 
+on-arrival: workers_spd += 1; catholics_spd += 1; z_relation -= 4/gdsu_modifer; revolutionaries_dissent -= 4; left_dissent -= 4; revolutionaries_strength += 3; left_strength += 3; reformist_dissent += 6; reformist_strength -= 6; 
 
 Affaris of a rival party are none of our intrest, Jager betrayed the *Zeltbrin Coalition* and he shouldn't be commemorated by us. 
