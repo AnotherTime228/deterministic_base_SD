@@ -1,0 +1,18 @@
+title: <span style="color: #40b3d7;">Perkorian</span> - <span style="color: #578b50;">Thrigalian</span> War finnaly comes to an end.
+subtitle: <span style="color: #89cbaf;">Crevia</span> arbitrated and negotieated a peace treaty betttwen the waring states. 
+on-arrival: trade_stability += 0.02; global_eco += 0.02; global_trade += 0.05;
+tags: event
+view-if: year = 1267 and month = 9
+priority: 2
+max-visits: 1
+face-image: img/Covro_peace.jpg
+
+<span style="color: #89cbaf;">Crevians</span> negotitetated a peace deal bettwen <span style="color: #40b3d7;">Perkoria</span> and <span style="color: #578b50;">Thrigal</span>. After 20 months and 700,000 people dead the war has finnaly come to an end.
+
+<span style="color: #578b50;">Thrigal</span> seceded Coloa, Ageline and Rivanezya island chains, in conpensation <span style="color: #40b3d7;">Perkoria</span> will pay significant reparations for the lost lands. <span style="color: #40b3d7;">Perkoria</span> has won the war, this peace is nothing more than the end of the <span style="color: #578b50;">Thrigalian</span> empire...
+
+-@imp: Finnaly the end to the blodshed.
+  
+@imp
+
+We can hope that now our economy will get back on its feet.
