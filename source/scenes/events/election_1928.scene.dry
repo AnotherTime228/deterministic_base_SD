@@ -1,4 +1,4 @@
-title: Reichstag Elections
+title: Caversket Elections
 new-page: true
 tags: event
 priority: -1
@@ -13,7 +13,7 @@ face-image: img/Rothe_Wahlen_1903.jpg
 
 = Elections, [+ month : month +] [+ year +]
 
-The Reichstag elections are to be held now.
+The Caversket elections are to be held now.
 
 - @election_algorithm: May we do our best...
 - @cancel_elections
@@ -120,30 +120,25 @@ if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
     Q.largest_party = 'KPD';
 }
 
-// coalitions
-Q.weimar_coalition = (Q.spd_r + Q.ddp_r + Q.z_r).toFixed(1);
-Q.progressive_coalition = (Q.spd_r + Q.ddp_r + Q.z_r + Q.blpm_r + Q.ppu_r).toFixed(1);
-Q.liberal_coalition = (Q.z_r + Q.ddp_r + Q.dvp_r + Q.ppu_r).toFixed(1); 
-Q.wide_liberal_coalition = (Q.z_r + Q.ddp_r + Q.dvp_r + Q.ppu_r + Q.other_r).toFixed(1);
-Q.grand_coalition = (Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r).toFixed(1);
-Q.bourgeois_coalition = (Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(1);
-Q.center_right_coalition = (Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r).toFixed(1);
-Q.right_coalition = (Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r + Q.ppu_r).toFixed(1);
-Q.far_right_coalition = (Q.dnvp_r + Q.nsdap_r).toFixed(1);
-Q.left_coalition = (Q.spd_r + Q.sapd_r).toFixed(1);
-// this is an absurd concept lol
-Q.popular_front_coalition = (Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3 + Q.sapd_r).toFixed(1);
-Q.anti_democratic_coalition = (Q.kpd_r + Q.nsdap_r + Q.dnvp_r).toFixed(1);
-// aka everyone except nazi, kpd, dnvp
-Q.neo_weimar_coalition = (Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(1);
-// Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
-Q.hitler_right_coalition = (Q.z_r + Q.dnvp_r + Q.nsdap_r).toFixed(1);
-// Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = (Q.spd_r + Q.kpd_r + Q.ddp_r + Q.sapd_r).toFixed(1);
 
-if (Q.kpd_relation >= 30) {
-    Q.weimar_coalition += Q.sapd_r;
-}
+// coalitions - VDSPM
+Q.left_coalition = (Q.spd_r + Q.sapd_r + Q.spm_r + Q.asum_r).toFixed(1).toFixed(1);
+Q.progressive_coalition = (Q.spd_r + Q.sapd_r + Q.spm_r + Q.asum_r + Q.ddp_r).toFixed(1);
+Q.popular_front_coalition = (Q.spd_r + Q.sapd_r + Q.spm_r + Q.asum_r + Q.z_r + Q.ddp_r).toFixed(1);
+Q.weimar_coalition = (Q.spd_r + Q.ddp_r + Q.z_r + Q.spm_r).toFixed(1).toFixed(1);
+Q.zeltbrin_plus_coalition = (Q.spd_r + Q.ddp_r + Q.z_r + Q.blpm_r + Q.ppu_r + Q.spm_r).toFixed(1);
+Q.grand_coalition = (Q.spd_r + Q.spm_r + Q.ddp_r + Q.z_r + Q.ppu_r + Q.dvp_r + Q.blpm_r).toFixed(1);
+
+Q.liberal_coalition = (Q.z_r + Q.ddp_r + Q.dvp_r + Q.ppu_r + Q.blpm_r).toFixed(1); 
+Q.wide_liberal_coalition = (Q.z_r + Q.ddp_r + Q.dvp_r + Q.ppu_r + Q.other_r + Q.blpm_r).toFixed(1);
+Q.center_right_coalition = (Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r + Q.blpm_r + Q.gnvp_r + Q.ppu_r).toFixed(1);
+Q.right_coalition = (Q.dvp_r + Q.other_r + Q.dnvp_r + Q.ppu_r + Q.gnvp_r).toFixed(1);
+Q.far_right_coalition = (Q.dnvp_r + Q.nsdap_r + Q.gnvp_r).toFixed(1);
+// this is an absurd concept lol
+Q.anti_democratic_coalition = (Q.sapd_r + Q.nsdap_r + Q.dnvp_r + Q.gnvp_r).toFixed(1);
+// aka everyone except nazi, kpd, dnvp
+// Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
+Q.hitler_right_coalition = (Q.dnvp_r + Q.nsdap_r + Q.dvp_r + Q.other_r + Q.gnvp_r).toFixed(1);
 
 Q.leverage = Q.spd_r;
 
@@ -348,13 +343,19 @@ go-to: coalition_menu
 
 **Potential coalitions:**
 
-Zeltbrin Coalition ([+ spd_name +] + GDSU + [+ ddp_name +]): [+ weimar_coalition +]%
+Zeltbrin Coalition (<span style="color: #dc0200;">**[+ spd_name +]**</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span>): [+ weimar_coalition +]%
 
-Liberal Coalition ([+ dvp_name +] + GDSU + [+ ddp_name +] + PPU+): [+ liberal_coalition +]%
+[? if weimar_coalition < 50 and liberal_reconciliation >= 10: Wide - Zeltbrin Coalition (<span style="color: #dc0200;">**[+ spd_name +]**</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span>[? if blpm_formed = 1 : + <span style="color: #00e8ff;">BLPM</span> ?]): [+ zeltbrin_plus_coalition +]% ?]
 
-Wide - Liberal Coalition ([+ dvp_name +] + GDSU + [+ ddp_name +] + PPU+ + others): [+ wide_liberal_coalition +]%
+[? if liberal_reconciliation >= 12: Grand Coalition (<span style="color: #dc0200;">**[+ spd_name +]**</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span> + <span style="color: #caa58b;">LDP</span>[? if blpm_formed = 1 : + <span style="color: #00e8ff;">BLPM</span> ?] ): [+ grand_coalition +]% ?]
 
-Right-wing Coalition (GDSU + [+ dvp_name +] + PPU+ + others + MNVP): [+ right_coalition +]%
+Liberal Coalition (<span style="color: #caa58b;">LDP</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span>): [+ liberal_coalition +]%
+
+[? if liberal_coalition < 50 : Wide - Liberal Coalition (<span style="color: #caa58b;">LDP</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span> + others): [+ wide_liberal_coalition +]% ?]
+
+Center-Right Coalition (<span style="color: #48b94a;">GDSU</span> + <span style="color: #caa58b;">LDP</span> + <span style="color: #4a9fde;">PPU</span> + others + <span style="color: #3F7BC1;">MNVP</span> [? if gnvp_formed = 1 : + <span style="color: #774ae2;">GNVP</span>  ?][? if blpm_formed = 1 : + <span style="color: #00e8ff;">BLPM</span>  ?]): [+ center_right_coalition +]%
+
+Right-wing Coalition (<span style="color: #caa58b;">LDP</span> + <span style="color: #4a9fde;">PPU</span> + others + <span style="color: #3F7BC1;">MNVP</span> [? if gnvp_formed = 1 : + <span style="color: #774ae2;">GNVP</span> ?]): [+ right_coalition +]%
 
 [? if nazi_urgency <= 1 and nsdap_r >= 15 : The rapid rise in NSDAP votes is extremely worrying. Many had believed that the party was moribund; now, some of us consider it to be the greatest threat to democracy in Germany. ?]
 
@@ -375,74 +376,144 @@ There are some potential coalition arrangements.
 - @left_coalition
 - @popular_front_coalition
 - @right_coalition
+- @center_right_coalition
 - @liberal_coalition
 - @wide_liberal_coalition
 
 # TODO: black-brown coalition
 
+// LIBERAL
+
 @liberal_coalition
-title: Refuse to form a government, so that a right-wing coalition may be formed.
-subtitle: [+ ddp_name +] + GDSU + [+ dvp_name +] + PPU+ ([+ liberal_coalition +]%)
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
+title: The liberal coalition can be formed. 
+subtitle: <span style="color: #caa58b;">LDP</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span>: [+ liberal_coalition +]%
 view-if: liberal_coalition >= 50
-choose-if: year < 1929
 
-There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties. [? if largest_party == "SPD": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
+There are enough votes for a liberal coalition of the <span style="color: #caa58b;">LDP</span>, <span style="color: #48b94a;">GDSU</span>, <span style="color: #ddd500;">FVP</span> and <span style="color: #4a9fde;">PPU</span>.
 
-- @liberal_coalition_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing coalition take power.
-- @grand_coalition: Actually, we wish to form a grand coalition after all.
-
-@no_liberal_coalition
-go-to: no_majority
-
-However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
-
-@liberal_coalition_sure
-subtitle: This will be extremely unpopular within our party.
-on-arrival: pro_republic -= 5; center_dissent += 15; left_dissent += 10; labor_dissent += 25; reformist_dissent += 25; neorevisionist_dissent += 15; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 5
-go-to: liberal_coalition_2
-
+- @liberal_coalition_2: Liberals create a goverment. 
+- @liberal_fail: Intrenal bickering bettwen the parties obstruct the creation of the goverment.
 
 @liberal_coalition_2
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: right_coalition >= 50
-choose-if: year < 1929
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
+choose-if: not(ldp_ideology < 0 and fvp_path = 1)
+go-to: liberal_coalition_3 if neuman_dead = 0; liberal_coalition_4 if neuman_dead = 1 and dvp_r > z_r; liberal_coalition_5 if neuman_dead = 1 and z_r > dvp_r
 
-Even though the DNVP is very reluctant to participate in such a coalition, they still accede to President Hindenburg's wishes. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
+@liberal_coalition_3
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Neuman"; chancellor_party = "LDP"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_liberal_coalition = 1;
+
+Liberals create another cabinet under chancellor Hans Neuman. 
+
+@liberal_coalition_4
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Schmit"; chancellor_party = "LDP"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_liberal_coalition = 1;
+
+Liberals create a new cabinet under chancellor Jakob Schmit of the <span style="color: #caa58b;">LDP</span>.
+
+@liberal_coalition_5
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Moller"; chancellor_party = "GDSU"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_liberal_coalition = 1;
+
+Liberals create a new cabinet under chancellor Stefan Moller of the <span style="color: #48b94a;">GDSU</span>.
+
+@liberal_fail
+on-arrival: lib_failed = 1;
+view-if: ldp_ideology < 0 and fvp_path = 1
+
+Liberals cannot form a working cabinet...
+
+go-to: coalition_menu
+
+// WIDE LIBERAL
 
 @wide_liberal_coalition
-title: Refuse to form a government, so that a right-wing coalition may be formed.
-subtitle: [+ ddp_name +] + GDSU + [+ dvp_name +] + PPU+ + others ([+ wide_liberal_coalition +]%)
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: liberal_coalition >= 50
-choose-if: year < 1929
+title: The liberal coalition can be formed. 
+subtitle: <span style="color: #caa58b;">LDP</span> + <span style="color: #48b94a;">GDSU</span> + <span style="color: #ddd500;">FVP</span> + <span style="color: #4a9fde;">PPU</span> and others: [+ wide_liberal_coalition +]%
+view-if: wide_liberal_coalition >= 50 and liberal_coalition < 50 and wide_liberal_coalition*1.1 > center_right_coalition
 
-There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties. [? if largest_party == "SPD": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
+There are enough votes for a wide-liberal coalition of the <span style="color: #caa58b;">LDP</span>, <span style="color: #48b94a;">GDSU</span>, <span style="color: #ddd500;">FVP</span> and <span style="color: #4a9fde;">PPU</span> and other small supporting parties.
 
-- @wide_coalition_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing coalition take power.
-- @grand_coalition: Actually, we wish to form a grand coalition after all.
+- @wide_liberal_coalition_2: Liberals create a goverment. 
+- @wide_liberal_fail: Intrenal bickering bettwen the parties obstruct the creation of the goverment.
 
-@no_wide_coalition
-go-to: no_majority
+@wide_liberal_coalition_2
+choose-if: fvp_path != 1
+go-to: liberal_coalition_3 if neuman_dead = 0; liberal_coalition_4 if neuman_dead = 1 and dvp_r > z_r; liberal_coalition_5 if neuman_dead = 1 and z_r > dvp_r
 
-However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
+@wide_liberal_fail
+on-arrival: lib_failed = 1;
+view-if: fvp_path = 1
 
-@wide_coalition_sure
-subtitle: This will be extremely unpopular within our party.
-on-arrival: pro_republic -= 5; center_dissent += 15; left_dissent += 10; labor_dissent += 25; reformist_dissent += 25; neorevisionist_dissent += 15; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 5
-go-to: wide_coalition_2
+Liberals cannot form a working cabinet...
 
+go-to: coalition_menu
 
-@wide_coalition_2
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
+// CENTRE-RIGHT COALITION
+
+@center_right_coalition
+title: The center-right coalition can form. 
+subtitle: <span style="color: #48b94a;">GDSU</span> + <span style="color: #caa58b;">LDP</span> + <span style="color: #4a9fde;">PPU</span> + others + <span style="color: #3F7BC1;">MNVP</span> and others: [+ center_right_coalition +]%
+view-if: center_right_coalition >= 50
+
+There are enough votes for a center-right coalition of the <span style="color: #48b94a;">GDSU</span>, <span style="color: #caa58b;">LDP</span>, <span style="color: #4a9fde;">PPU</span>, <span style="color: #3F7BC1;">MNVP</span> and other small supporting parties.
+
+- @center_right_2: The government is created. 
+- @center_right_fail: Intrenal bickering bettwen the parties obstruct the creation of the goverment.
+
+@center_right_2
+choose-if: not(ldp_ideology + gdsu_ideology < 1)
+go-to: center_right_3 if neuman_dead = 0; center_right_4 if neuman_dead = 1 and dvp_r > dnvp_r; center_right_5 if neuman_dead = 1 and dnvp_r > dvp_r
+
+@center_right_3
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Neuman"; chancellor_party = "LDP"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
+
+New cabinet is created under chancellor Hans Neuman. 
+
+@center_right_4
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Fisher"; chancellor_party = "LDP"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
+
+Klaus Fisher of the <span style="color: #caa58b;">LDP</span> becomes the new chancellor.
+
+@center_right_5
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Igo"; chancellor_party = "I"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
+
+Olaf Igo of the independent becomes the new chancellor.
+
+@center_right_fail
+on-arrival: lib_failed = 1;
+view-if: (ldp_ideology + gdsu_ideology) < 1
+
+Center-Right cabinet cannot form...
+
+go-to: coalition_menu
+
+// RIGHT COALITION
+
+@right_coalition
+title: The center-right coalition can form. 
+subtitle: <span style="color: #caa58b;">LDP</span> + <span style="color: #4a9fde;">PPU</span> + others + <span style="color: #3F7BC1;">MNVP</span> and others: [+ center_right_coalition +]%
 view-if: right_coalition >= 50
-choose-if: year < 1929
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
 
-Even though the DNVP is very reluctant to participate in such a coalition, they still accede to President Hindenburg's wishes. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
+There are enough votes for a Right Wing coalition of the  <span style="color: #caa58b;">LDP</span>, <span style="color: #4a9fde;">PPU</span>, <span style="color: #3F7BC1;">MNVP</span> and other small supporting parties.
 
+- @right_2: The government is created. 
+- @right_fail: Intrenal bickering bettwen the parties obstruct the creation of the goverment.
 
+@right_2
+choose-if: not(ldp_ideology + gdsu_ideology < 1)
+go-to: center_right_4 if neuman_dead = 0; right_3 if neuman_dead = 1 and dnvp_r > (dvp_r + other_r); center_right_5 if neuman_dead = 1 and dnvp_r < (dvp_r + other_r)
+
+@right_3
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Himshed"; chancellor_party = "MNVP"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
+
+Olaf Himshed of the <span style="color: #3F7BC1;">MNVP</span> becomes the new chancellor.
+
+@right_fail
+on-arrival: lib_failed = 1;
+view-if: ldp_ideology < 1
+
+The Right wing cannot form a cabinet...
+
+go-to: coalition_menu
+
+//
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
@@ -645,40 +716,6 @@ on-arrival: reichswehr_loyalty += 0.1
 In response to the KPD's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nazi SA enter Berlin and begin clashing with our supporters. Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
 
 - @civil_war: A civil war, then.
-
-
-
-@right_coalition
-title: Refuse to form a government, so that a right-wing coalition may be formed.
-subtitle: GDSU + [+ dvp_name +] + PPU+ + others + MNVP ([+ right_coalition +]%)
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: right_coalition >= 50
-choose-if: year < 1929
-
-There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties. [? if largest_party == "SPD": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
-
-- @right_coalition_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing coalition take power.
-- @grand_coalition: Actually, we wish to form a grand coalition after all.
-
-@no_right_coalition
-go-to: no_majority
-
-However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
-
-@right_coalition_sure
-subtitle: This will be extremely unpopular within our party.
-on-arrival: pro_republic -= 5; center_dissent += 15; left_dissent += 10; labor_dissent += 25; reformist_dissent += 25; neorevisionist_dissent += 15; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 5
-go-to: right_coalition_2
-
-
-@right_coalition_2
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: right_coalition >= 50
-choose-if: year < 1929
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
-
-Even though the DNVP is very reluctant to participate in such a coalition, they still accede to President Hindenburg's wishes. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
-
 
 
 @no_majority
