@@ -1,11 +1,13 @@
-title: Democratic Social Front 
+title: DSF Affairs
 new-page: true
 view-if: democratic_front_affairs <= 0
-on-arrival: democratic_front_affairs += 7; month_actions += 1; rg_militarisation_cost = 2;
+on-arrival: democratic_front_affairs += 6; month_actions += 1; rg_militarisation_cost = 2;
 is-card: true
 card-image: img/rb_affairs_2.jpg
 tags: paramilitary
 max-visits: 20
+
+@main
 
 = Democratic Social Front 
 
@@ -17,6 +19,7 @@ Should we increse our funding to the Democratic Social Front?
 - @militant_2: Use our existing resources to support more training and recriutment for the Democratic Social Front.
 - @same: Keep the Democratic Social Front as it is.
 - @cut_rg: Cut funding for the Democratic Social Front.
+- @main: reuturn to main
 - @easy_discard
 
 @militant
