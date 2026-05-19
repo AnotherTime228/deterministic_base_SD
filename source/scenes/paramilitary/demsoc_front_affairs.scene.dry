@@ -15,12 +15,33 @@ The Democratic Social Front our is a paramilitary mostly affiliated with the old
 
 Should we increse our funding to the Democratic Social Front?
 
+Current DSF investment [ + dsf_investment + ]
+
+- @rally: rally
+- @internal: internal
+- @operations: operations
+- @easy_discard
+
+@rally
+
+The Democratic Social Front is already serving the purpose it needs to serve. There is no reason to change what already works.
+
+
+@internal
+
+The Democratic Social Front is already serving the purpose it needs to serve. There is no reason to change what already works.
+
+
+@operations
+
+The Democratic Social Front is already serving the purpose it needs to serve. There is no reason to change what already works.
+
+
 - @militant: Chanel more funds to support the Democratic Social Front.
 - @militant_2: Use our existing resources to support more training and recriutment for the Democratic Social Front.
 - @same: Keep the Democratic Social Front as it is.
 - @cut_rg: Cut funding for the Democratic Social Front.
 - @main: reuturn to main
-- @easy_discard
 
 @militant
 choose-if: para_resources >= rg_militarisation_cost
