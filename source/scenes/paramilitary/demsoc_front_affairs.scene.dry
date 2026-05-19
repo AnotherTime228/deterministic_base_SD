@@ -6,17 +6,17 @@ is-card: true
 card-image: img/rb_affairs_2.jpg
 tags: paramilitary
 max-visits: 20
-go-to: main
+go-to: affairs
 
-@main
-
-= Democratic Social Front 
+= Democratic Social Front Affairs 
 
 The Democratic Social Front our is a paramilitary mostly affiliated with the old SPM. They server various tasks such such main party defence, union support and prorotectetion, rally defece and organisation and many more. 
 
 Should we increse our funding to the Democratic Social Front?
 
 Current DSF investment [ + dsf_investment + ]
+
+@affairs
 
 - @rally: rally
 - @internal: internal
