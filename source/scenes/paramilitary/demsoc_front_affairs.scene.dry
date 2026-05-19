@@ -6,6 +6,7 @@ is-card: true
 card-image: img/rb_affairs_2.jpg
 tags: paramilitary
 max-visits: 20
+go-to: main
 
 @main
 
