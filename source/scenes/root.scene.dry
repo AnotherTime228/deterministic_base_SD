@@ -137,6 +137,9 @@ Q.party_policy_coalition = 0;
 Q.party_policy_military = 0;
 Q.party_policy_land = 0;
 
+Q.party_defence = 1;
+Q.union_defence = 1;
+
 // internal party politic 
 
 Q.ldp_reform = 0;
@@ -157,6 +160,9 @@ Q.gdsu_modifer = 1;
 Q.kpm_modifier = 1;
 
 // inter-party relations
+
+Q.kpm_ally = 0;
+Q.left_betray = 0;
 
 Q.liberal_reconciliation = 0;
 
@@ -197,16 +203,19 @@ Q.prussian_government = "Z";
 // Reichsbanner, 
 Q.rb_strength = 170;
 Q.rb_militancy = 0.25;
-Q.rb_agrarian = 0;
-Q.women_in_rb = 0;
+Q.dsf_experce = 0.7;
 Q.rb_banned = 0;
+Q.dsf_party = 6;
+Q.dsf_ideology = 4; // ++ more revolutionary -- more republican
+Q.dsf_rfb_coop = 4;
 
 // RFB
 Q.rfb_strength = 75;
 Q.rfb_militancy = 0.5;
+Q.kpm_experce = 1;
 Q.rfb_agrarian = 0;
 Q.rfb_banned = 0;
-Q.rfb_banned_prussia = 0;
+Q.rbf_party = 4;
 
 // DFF 
 Q.df_strength = 680;
@@ -230,7 +239,7 @@ Q.interior_police_strength = 50;
 Q.interior_police_militancy = 1;
 Q.interior_police_loyalty = 0.45;
 
-Q.prussian_police_strength = 90;
+Q.prussian_police_strength = 110;
 Q.prussian_police_militancy = 1;
 Q.prussian_police_loyalty = 0.5;
 
