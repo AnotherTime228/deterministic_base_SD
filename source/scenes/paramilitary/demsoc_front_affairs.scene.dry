@@ -31,6 +31,7 @@ Current DSF investment [ + dsf_investment + ]
 - @recruitment: Rally for the DSF.
 - @republic: Rally to save and reform the federation.
 - @right: Rally against the Right
+- @revolution: Rally against the Right
 - @affairs: reuturn to affairs
 
 @party
@@ -56,14 +57,19 @@ on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
 
 We rally for the party
 
+@revolution
+on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
+
+We rally for the party
+
 
 @internal
 
 = Democratic Social Front Internal politics
 
-- @party_2: Bring the DSF closer to the party.
-- @republican: Push the DSF towards being a more republican paramilitar.
-- @rev: Push the DSF towards being a more revolutionary paramilitary.
+- @party_2: Bring the DSF closer to the party policy.
+- @republican: Push the DSF towards being a more republican.
+- @rev: Push the DSF towards being a more revolutionary.
 - @affairs: reuturn to affairs
 
 @party_2
@@ -89,31 +95,43 @@ The Democratic Social Front is already serving the purpose it needs to serve. Th
 
 = Democratic Social Front Rally
 
-- @party: Rally for the party.
-- @recruitment: Rally for the DSF.
-- @republic: Rally to save and reform the federation.
-- @militant_2: Use our existing resources to support more training and recriutment for the Democratic Social Front.
-- @right: Rally against the Right
+- @military: Focus on funding more military equipment for the DSF. 
+- @military_rep: Fund more equipment to the DSF, but focus on less military needs.
+- @unions: The DSF should support and defend our unions. 
+- @rfg: Focus on incresing the cooperation with the RFG 
+- @defend: Focus the DSF on protecting the party.
+- @fight: Order the DSF to use all thier force to attack the right. 
 
-@party
+@military
+on-arrival: rb_militancy += 0.02; dsf_investment -= 1; rb_strength += 8;
+
+We rally for the party
+
+
+@military_rep
+on-arrival: rb_militancy -= 0.01; dsf_investment -= 1; rb_strength += 22;
+
+We rally for the party
+
+
+@unions
+on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
+
+We rally for the party
+
+@rfg
 on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
 
 We rally for the party
 
 
-@recruitment
+@defend
 on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
 
 We rally for the party
 
-
-@republic
+@fight
 on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
 
 We rally for the party
 
-
-@right
-on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
-
-We rally for the party
