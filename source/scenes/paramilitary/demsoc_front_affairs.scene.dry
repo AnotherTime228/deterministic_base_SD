@@ -1,7 +1,7 @@
 title: DSF Affairs
 new-page: true
-view-if: democratic_front_affairs <= 0
-on-arrival: democratic_front_affairs += 6; month_actions += 1; rg_militarisation_cost = 2;
+view-if: democratic_front_affairs <= 0;
+on-arrival: democratic_front_affairs += 6; month_actions += 1; rg_militarisation_cost = 2; 
 is-card: true
 card-image: img/rb_affairs_2.jpg
 tags: paramilitary
@@ -12,32 +12,33 @@ go-to: affairs
 
 = Democratic Social Front Affairs 
 
-The Democratic Social Front our is a paramilitary mostly affiliated with the old SPM. They server various tasks such such main party defence, union support and prorotectetion, rally defece and organisation and many more. 
+Democratic Social Front plays a vital role for us. They are the closest to the party and serve as a vercitile arm of the party and can help us in many goals.
 
-Should we increse our funding to the Democratic Social Front?
+What should we do with the <span style="color: #b52f2f;">DSF</span>?
 
-Current DSF investment [ + dsf_investment + ]
+Current <span style="color: #b52f2f;">DSF</span> resources [ + dsf_investment + ]
 
 - @rally: The DSF can organise a rally.
-- @internal: Tackle internal paramilitary politics
-- @operations: Direct the Operations of the DSF
+- @internal: Tackle internal paramilitary politics.
+- @operations: Direct the Operations of the DSF.
 - @easy_discard
 
 @rally
+subtitle: - 1 DSF resources
 
 = Democratic Social Front Rally
 
-- @party: Rally for the party.
-- @recruitment: Rally for the DSF.
-- @republic: Rally to save and reform the federation.
-- @right: Rally against the Right.
-- @revolution: Rally for revolution.
+- @right: Rally for defense against the fascists and the far-right.
+- @revolution: Rally for revolution against the bourgeois parties and the king.
+- @party: Rally for the party and for Socialism.
+- @recruitment: Rally to boost the recruitment and strenth of the DSF.
+- @republic: Rally for further republicanism and reformation of the Federation.
 - @affairs: reuturn to affairs
 
 @party
-on-arrival: rb_militancy += 0.015; dsf_investment -= 1; rb_strength += 10;
+on-arrival: dsf_investment -= 1; workers_spd += 3*(dsf_party/8); socialism += 1
 
-We rally for the party
+<span style="color: #b52f2f;">DSF</span> rallies for the party, strengtening our support among the workers and spreading the message of socialism. 
 
 
 @recruitment
