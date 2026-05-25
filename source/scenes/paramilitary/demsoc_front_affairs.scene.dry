@@ -157,7 +157,7 @@ on-arrival: dsf_investment -= 1; rb_strength -= 10; party_defence += 0.1; dsf_ex
 We use the <span style="color: #b52f2f;">DSF</span> to protect our party officials and our rallies. 
 
 @fight
-choose-if: streetfight >= 1 and rb_strength >= 80;
+choose-if: streetfight >= 1; rb_strength >= 80;
 unavailable-subtitle: The violence in the country is too low for full on streetfighting. 
 on-arrival: rb_militancy -= 0.01; dsf_investment -= 1; rb_strength -= 15; dsf_experce += 0.03; sh_strength -= 10*rb_militancy; sa_strength -= 10*rb_militancy;
 
