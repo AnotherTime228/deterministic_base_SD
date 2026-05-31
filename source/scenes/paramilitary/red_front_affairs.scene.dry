@@ -129,7 +129,7 @@ We fund more military equipment for the <span style="color: #b52f2f;">DSF</span>
 
 Buying more miliaty equipment pleases the left and pushes the <span style="color: #b52f2f;">DSF</span> closer to the <span style="color: #8B0000;">RGF</span>.
 
-@rural
+@rural_2
 on-arrival: dsf_ideology -= 2; reformist_dissent -= 4; revolutionaries_dissent += 3; reformist_strength += 2; rb_militancy -= 0.03;
 
 We push the <span style="color: #b52f2f;">DSF</span> to adopt a fully <span style="color: #dee03a;">Republican</span> policy. 
