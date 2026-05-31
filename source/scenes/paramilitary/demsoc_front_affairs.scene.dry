@@ -141,7 +141,7 @@ on-arrival: para_resources -= 1; organisation_workers += 1; labor_strength += 3;
 The <span style="color: #b52f2f;">DSF</span> helps unions organise and protects them if nececary, this not only expands our apeal among the workers but also eases tention with the labour faction.
 
 @rfg
-choose-if: dsf_ideology >= 1
+choose-if: dsf_ideology >= 1 and (sapd_formed = 0 or kpm_ally = 1)
 unavailable-subtitle: We cannot support revolutionary <span style="color: #8B0000;">RGF</span> if <span style="color: #b52f2f;">DSF</span> is republican.
 on-arrival: rb_militancy += 0.05*(dsf_rfb_coop/8); para_resources -= 1; rfb_strength += 3*(dsf_rfb_coop/8); dsf_rfb_coop += 1; revolutionaries_dissent -= 3; revolutionaries_strength += 2;
 
