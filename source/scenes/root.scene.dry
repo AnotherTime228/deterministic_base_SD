@@ -127,15 +127,15 @@ Q.organisation_middle = 11;
 
 Q.expand_media = 0;
 Q.revolutionary_preparations = 0;
-Q.united_front_theory = 0;
 
 // party_policy - congresses 
 
-Q.party_policy_main = 0;
-Q.party_policy_rev = 0;
-Q.party_policy_coalition = 0;
-Q.party_policy_military = 0;
-Q.party_policy_land = 0;
+Q.party_policy_main = 0; // REFORM - REVOLUTION
+Q.party_policy_rev = 0; // what to do with revolution
+Q.party_policy_coalition = 0; // COALITIONS
+Q.united_front_theory = 0; // UNITED FRONT THEORY
+Q.party_policy_unions = 0; // UNIONS
+Q.party_policy_land = 0; // LAND REFROM 
 
 Q.party_defence = 1;
 Q.union_defence = 1;
