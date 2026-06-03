@@ -8,3 +8,68 @@ tags: paramilitary
 max-visits: 20
 
 = Paramilitray Coordination
+
+Cooperation bettwen the party, the unions and our parimilitaries plays a vital role in the political and military landscape of our situation. 
+
+[? if (sapd_formed = 0 and kpm_ally = 0): Now that we broke off with the <span style="color: #940000;">KPM</span> the <span style="color: #8B0000;">RGF</span> refuses to cooperate with us. ?]
+
+How should we approach this issue?
+
+- @rgf_dsf: Work towards strentehing the cooperation bettwen the RGF and the DSF.
+- @rural: Connect and Coordinate the RPG with other paramilitaries. 
+- @rgf: Push the RGF closer to the party line.
+- @dsf: Push the DSF closer to the party line.
+- @party: Use party resources to coordinate bettwer with the paramilitaries.
+- @police: Maybe try cooperate with the state police.
+
+@rgf_dsf
+subtitle: -1 paramilitary resources
+choose-if: (sapd_formed = 0 or kpm_ally = 1) and para_resources >= 1
+unavailable-subtitle: [? if (sapd_formed = 0 and kpm_ally = 0): Now that we broke off with the <span style="color: #940000;">KPM</span> the <span style="color: #8B0000;">RGF</span> refuses to cooperate with us. ?] [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: para_resources -= 1; rb_strength += 2; dsf_experce += 0.01; rfb_strength += 1; rgf_experce += 0.01; dsf_rfb_coop += 2.5; revolutionaries_dissent -= 1; center_dissent -= 1; left_dissent -= 1; 
+
+We increse the cooperation bettwen the <span style="color: #8B0000;">RGF</span> and the <span style="color: #b52f2f;">DSF</span>. 
+
+@rural
+view-if: rgf_agrarian = 1
+subtitle: -1 paramilitary resources
+choose-if: (sapd_formed = 0 or kpm_ally = 1) and para_resources >= 1
+unavailable-subtitle: [? if (sapd_formed = 0 and kpm_ally = 0): Now that we broke off with the <span style="color: #940000;">KPM</span> the <span style="color: #8B0000;">RGF</span> refuses to cooperate with us. ?] [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: para_resources -= 1; rb_strength += 7; rfb_strength += 5; dsf_rfb_coop += 1; peasants_spd += 1*(rgf_party/8) if sapd_formed = 0; rural_spd += 0.75*(rgf_party/8) if sapd_formed = 0; peasants_spd += 0.75*(rgf_party/8) if sapd_formed = 1; rural_spd += 0.5*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 1 if sapd_formed = 1; rural_sapd += 0.75 if sapd_formed = 1; agrarnians_strength += 4; agrarnians_dissent -= 3;
+
+The <span style="color: #5f9403;">RPG</span> serves as a connector bettwen the our paramilitaries and funnels many new members form the countryside to our respective paramilitaries.
+
+@rgf
+choose-if: (sapd_formed = 0 or kpm_ally = 1) and para_resources >= 1
+unavailable-subtitle: [? if (sapd_formed = 0 and kpm_ally = 0): Now that we broke off with the <span style="color: #940000;">KPM</span> the <span style="color: #8B0000;">RGF</span> refuses to cooperate with us. ?] [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: para_resources -= 1; rgf_party += 2; center_dissent -= 3; left_dissent -= 3; revolutionaries_dissent -= 3; sapd_relation -= 2/kpm_modifier; 
+
+We push the <span style="color: #8B0000;">RGF</span> closer to the party line and increse its cooperation with the party.
+
+[? if sapd_formed = 1 : <span style="color: #940000;">KPM</span> dissaproves of our incresed influence in the <span style="color: #8B0000;">RGF</span> ?]
+
+@dsf
+choose-if: para_resources >= 1
+unavailable-subtitle: [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: para_resources -= 1; dsf_party += 2; center_dissent -= 2; left_dissent -= 1; reformist_dissent -= 4;
+
+We push the <span style="color: #b52f2f;">DSF</span> closer to the party line and increse its cooperation with the party.
+
+@party
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: resources -= 1; rgf_party += 1; dsf_party += 1; dsf_party += 1 if (sapd_formed = 0 and kpm_ally = 0); rb_strength += 2; reformist_dissent += 2; labor_dissent += 2; center_dissent += 2
+
+We use our party resources to bolster our cooperation with our paramilitaries.  
+
+[? if (sapd_formed = 0 and kpm_ally = 0): Now that we broke off with the <span style="color: #940000;">KPM</span>, all of our funds go towards the <span style="color: #b52f2f;">DSF</span> ?]
+
+@police
+view-if: spd_in_government = 1 and prussian_police_loyalty <= 0.40
+subtitle: -1 paramilitary resources
+choose-if: para_resources >= 1
+unavailable-subtitle: [? if para_resources < 1: We dont have enough funds. ?] 
+on-arrival: para_resources -= 1; rb_strength += 3; dsf_experce += 0.02; police_coop += 3; reformist_dissent -= 4; reformist_strength += 2; left_dissent += 3; revolutionaries_dissent += 3; sapd_relation -= 3/kpm_modifier; 
+
+Our efforts to root out the most rectionary elements of the police have been sucesful and we can even try to make it cooperate to some extent with the <span style="color: #b52f2f;">DSF</span>.
