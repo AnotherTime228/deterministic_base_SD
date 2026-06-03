@@ -92,10 +92,10 @@ We are working towards creating the Rural Red Guards.
 view-if: rgf_agrarian = 1
 on-arrival: rfb_strength += 4; rgf_experce += 0.02; peasants_spd += 1*(rgf_party/8) if sapd_formed = 0; rural_spd += 0.75*(rgf_party/8) if sapd_formed = 0; peasants_spd += 0.75*(rgf_party/8) if sapd_formed = 1; rural_spd += 0.5*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 1 if sapd_formed = 1; rural_sapd += 0.75 if sapd_formed = 1; agrarnians_strength += 3; agrarnians_dissent -= 3;
 
-We are expandign the Rural Red Guards, building up their power and strenthening our posiotion in the countryside and brothening our support. 
+We are expandign the <span style="color: #5f9403;">RPG </span>, building up their power and strenthening our posiotion in the countryside as well as brothening our support. 
 
 @rev
-on-arrival: reformist_dissent += 4; reformist_strength -= 1; revolutionaries_dissent -= 4; revolutionaries_strength += 3; rev_plus += 0.1; revolutionary_preparations += revolution_ready;
+on-arrival: reformist_dissent += 4; reformist_strength -= 1; revolutionaries_dissent -= 4; revolutionaries_strength += 3; rev_plus += 0.1; revolutionary_preparations += 0.5*revolution_ready;
 
 We are focusing on our expanding our revolutionary potential and improving our methods of sabotage, organising and military work. 
 
@@ -140,14 +140,14 @@ We fund more military equipment for the <span style="color: #8B0000;">RGF</span>
 view-if: rgf_agrarian = 0
 on-arrival: rgf_agrarian_support += 3; para_resources -= 1; peasants_spd += 2*(rgf_party/8) if sapd_formed = 0; rural_spd += 1.5*(rgf_party/8) if sapd_formed = 0; peasants_spd += 1.5*(rgf_party/8) if sapd_formed = 1; rural_spd += 1*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 2 if sapd_formed = 1; rural_sapd += 1.5 if sapd_formed = 1; revolutionaries_dissent -= 1; revolutionaries_strength += 1; agrarnians_strength += 2; agrarnians_dissent -= 3;
 
-Maybe we can create a Rural sub-organisation of the RGF? This will extend our paramilitary wing to the countryside, apease the agrarians and gain us valuble rural support. 
+Maybe we can create a Rural sub-organisation of the <span style="color: #8B0000;">RGF</span>? This will extend our paramilitary wing to the countryside, apease the agrarians and gain us valuble rural support. 
 
 
 @rural_4
 view-if: rgf_agrarian = 1
 on-arrival: rfb_strength += 9; para_resources -= 1; peasants_spd += 4*(rgf_party/8) if sapd_formed = 0; rural_spd += 3*(rgf_party/8) if sapd_formed = 0; peasants_spd += 3*(rgf_party/8) if sapd_formed = 1; rural_spd += 2*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 4 if sapd_formed = 1; rural_sapd += 3 if sapd_formed = 1; revolutionaries_dissent -= 1; revolutionaries_strength += 1; agrarnians_strength += 2; agrarnians_dissent -= 3;
 
-Expanding the Rural Red Guards massively helps us in 
+Expanding the <span style="color: #5f9403;">RPG </span> massively helps us in the countryside and expands the reach of the party and the <span style="color: #8B0000;">RGF</span>.
 
 
 @unions
