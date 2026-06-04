@@ -136,7 +136,7 @@ We fund more civilian equipment for the <span style="color: #b52f2f;">DSF</span>
 This allows the <span style="color: #b52f2f;">DSF</span> to expand and pushes it more towards <span style="color: #dee03a;">Republican</span> position.
 
 @unions
-on-arrival: para_resources -= 1; organisation_workers += 1; labor_strength += 3; labor_dissent -= 3; workers_spd += 2*(dsf_party/8); union_defence += 0.05; dsf_experce += 0.01;
+on-arrival: para_resources -= 1; organisation_workers += 1; labor_strength += 3; labor_dissent -= 3; workers_spd += 2*(dsf_party/8); union_defence += 0.1; dsf_experce += 0.01;
 
 The <span style="color: #b52f2f;">DSF</span> helps unions organise and protects them if nececary, this not only expands our apeal among the workers but also eases tention with the labour faction.
 
