@@ -1,0 +1,44 @@
+title: Rural Question in our economic plan 
+subtitle: What should we do with our rural program, now that we have a concrete economic plan?
+view-if: economic_plan > 0
+max-visits: 1
+tags: event
+
+= Rural Question in our economic plan
+
+Now that we have finnaly adopted a economic plan, our agrarian wing demands that some form of rural policy to be included in the plan.  
+
+- @takeover: Support immediate armed takovers and collectivisation of big aristocratic land estates. 
+- @collectivisation: Support a mixed collectivisation-nationalisation land refrom plan, allowing some moderate takovers. 
+- @collectivisation_2: Support a moderate collectivisation land plan, focused on non-violent action.
+- @land_reform: Support a traditional land reform focused on giving peasants their own land.
+- @ignore: Agrarian struggle in not our main priority. 
+
+@takeover
+subtitle: Our radical plan allows us to support near-revolutionary actions by the peasants.
+unavailable-subtitle: The economic plan is not radical enough to support such a action.
+choose-if: economic_plan = 3
+on-arrival: land_plan = 4; agrarnians_strength += 5; agrarnians_dissent -= 8; revolutionaries_strength += 8; left_dissent -= 8; revolutionaries_dissent -= 8; reformist_dissent += 12;
+
+@collectivisation
+subtitle: This the option that is supported the agrarian faction. It focuses on collectivisation and allows takovers of unused land. 
+unavailable-subtitle: The economic plan is not radical enough to support such a action.
+choose-if: economic_plan = 3 or economic_plan = 2
+on-arrival: land_plan = 3; agrarnians_strength += 12; agrarnians_dissent -= 15; left_dissent -= 6; revolutionaries_dissent -= 4; reformist_dissent += 6; 
+
+@collectivisation_2
+subtitle: This is a safe option that does not push the countyside into chaos, but also fuels our <span style="color: #d61818;">socialist</span> ambitions.
+unavailable-subtitle: The economic plan is too radical enough to support such a action.
+choose-if: economic_plan = 1 or economic_plan = 2
+on-arrival: land_plan = 2; agrarnians_strength += 9; agrarnians_dissent -= 10; center_strength += 4; center_dissent -= 5; reformist_dissent -= 5
+
+@land_reform
+subtitle: Our reformis plan allows us to support traditional land reform.
+unavailable-subtitle: The economic plan is too radical enough to support such a action.
+choose-if: economic_plan = 1
+on-arrival: land_plan = 1; agrarnians_strength -= 5; agrarnians_dissent += 5; revolutionaries_dissent += 5; reformist_strength += 10; reformist_dissent -= 10; ddp_relation += 4*fvp_modifer ; z_relation += 4*gdsu_modifer ;
+
+@ignore
+on-arrival: agrarnians_strength -= 20; agrarnians_dissent += 25
+
+Agrarian struggle in not our main priority.

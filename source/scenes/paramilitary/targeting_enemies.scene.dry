@@ -1,0 +1,10 @@
+title: Targetting our enemies
+new-page: true
+view-if: target_enemies <= 0 
+on-arrival: target_enemies += 7; month_actions += 1; rg_militarisation_cost = 2;
+is-card: true
+card-image: img/rev_prep.jpg
+tags: paramilitary
+max-visits: 20
+
+= Targetting our enemies

@@ -1,0 +1,180 @@
+title: RGF Affiars 
+new-page: true
+view-if: red_guard_affairs <= 0 and (sapd_formed = 0 or kpm_ally = 1)
+on-arrival: red_guard_affairs += 5; month_actions += 1; rg_militarisation_cost = 2;
+is-card: true
+card-image: img/rfb_affairs.jpg
+tags: paramilitary
+max-visits: 20
+go-to: affairs
+
+@affairs
+
+= Red Guard Front Affairs 
+
+The Red Guards are a invaluble force of the party and the working class. They serve as the most left-wing organisation and they are the strongest revolutionary force in the country.
+
+What should we do with the <span style="color: #8B0000;">RGF</span>?
+
+- @rally: The RGF can organise a rally.
+- @internal: Tackle internal paramilitary politics.
+- @operations: Direct the Operations of the RGF.
+- @easy_discard
+
+@rally
+choose-if: para_resources >= 1
+unavailable-subtitle: Not enough resources.
+subtitle: - 1 paramilitary resources
+
+= Red Guard Front Rally
+
+- @right: Rally against the evil, corrupt and reactionary right wing government. 
+- @revolution: Rally for revolution against the corrupt bourgeois and the broken system.
+- @party: Rally for the party and the true Socialis movement.
+- @recruitment: Rally to boost the recruitment and strenth of the RGF.
+- @affairs: reuturn to affairs
+
+@party
+on-arrival: para_resources -= 1; workers_spd += 2*(rgf_party/8); socialism += 1.5; unemployed_spd += 1*(rgf_party/8); workers_spd += 1.5*(rgf_party/8) if sapd_formed = 0; unemployed_spd += 1*(rgf_party/8) if sapd_formed = 0; workers_sapd += 3 if sapd_formed = 1; unemployed_sapd += 2 if sapd_formed = 1;
+
+<span style="color: #8B0000;">RGF</span> rallies for the party, strengtening our support among the workers and spreading the message of socialism. 
+
+
+@recruitment
+on-arrival: para_resources -= 1; rfb_strength += 6; workers_spd += 1*(rgf_party/8); workers_spd += 1*(rgf_party/8) if sapd_formed = 0; workers_sapd += 1.5 if sapd_formed = 1; unemployed_sapd += 1 if sapd_formed = 1;
+
+<span style="color: #8B0000;">RGF</span> rallies the people to join their ranks and support our causes. 
+
+@right
+view-if: in_right_coalition >= 1
+on-arrival: para_resources -= 1; workers_dnvp -= 1; workers_nsdap -= 1; rfb_strength += 2; sh_strength -= 3; new_middle_nsdap -= 1; peasants_dnvp -= 1; rural_dnvp -= 1;
+
+We rally against the right, while it is less effective than attacking their paramilitaries directly, it dicurages people from joing them and works to our advantage.  
+
+@revolution
+on-arrival: para_resources -= 1; rfb_strength += 4; revolutionaries_strength += 3; revolutionaries_dissent -= 3; reformist_dissent += 3; reformist_strength -= 2; workers_spd += 2*(rgf_party/8); unemployed_spd += 2*(rgf_party/8); workers_spd += 2*(rgf_party/8) if sapd_formed = 0; unemployed_spd += 2*(rgf_party/8) if sapd_formed = 0; workers_sapd += 3 if sapd_formed = 1; unemployed_sapd += 2 if sapd_formed = 1; radicalisation += 0.5; labour_unrest += 1; sapd_relation += 3*kpm_modifier
+
+The <span style="color: #8B0000;">RGF</span> rallies for a violent socialist revolution against the burgoise and the state. This is a very efficient ralling cry and attracts many radicalised workers to our cause. 
+
+@internal
+
+= Democratic Social Front Internal politics
+
+- @party_2: Bring the RGF closer to the party policy.
+- @rev: Organise better coordination of our revolutionary preparations. 
+- @assure: Assure the RGF that the revolution will happen, just not yet...
+- @rural: Work towards creating the Rural Red Guard.
+- @rural_2: Expand administative power of the Rural Red Guard and work to integrate them into our revolutionary machine. 
+- @affairs: reuturn to affairs
+
+@party_2
+subtitle: Doing so will apease party offcials
+on-arrival: rgf_party += 1; center_dissent -= 3; left_dissent -= 3; revolutionaries_dissent -= 3; sapd_relation -= 1.5/kpm_modifier; 
+
+We push the <span style="color: #8B0000;">RGF</span> closer to the party line and increse cooperation with the party.
+
+[? if sapd_formed = 1 : <span style="color: #940000;">KPM</span> dissaproves of our incresed influence in the <span style="color: #8B0000;">RGF</span> ?]
+
+@assure
+view-if: party_policy_rev >= 2
+on-arrival: left_betray -= 1; sapd_relation += 2*kpm_modifier; left_dissent -= 3; revolutionaries_dissent -= 3; reformist_dissent += 2;
+
+We push the <span style="color: #8B0000;">RGF</span> closer to the party line and increse cooperation with the party.
+
+
+@rural
+view-if: rgf_agrarian = 0 and rgf_agrarian_support >= 1
+on-arrival: rgf_agrarian_support += 2; agrarnians_strength += 2; agrarnians_dissent -= 3;
+
+We are working towards creating the Rural Red Guards.
+
+@rural_2
+view-if: rgf_agrarian = 1
+on-arrival: rfb_strength += 4; rgf_experce += 0.02; peasants_spd += 1*(rgf_party/8) if sapd_formed = 0; rural_spd += 0.75*(rgf_party/8) if sapd_formed = 0; peasants_spd += 0.75*(rgf_party/8) if sapd_formed = 1; rural_spd += 0.5*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 1 if sapd_formed = 1; rural_sapd += 0.75 if sapd_formed = 1; agrarnians_strength += 3; agrarnians_dissent -= 3;
+
+We are expandign the <span style="color: #5f9403;">RPG </span>, building up their power and strenthening our posiotion in the countryside as well as brothening our support. 
+
+@rev
+on-arrival: reformist_dissent += 4; reformist_strength -= 1; revolutionaries_dissent -= 4; revolutionaries_strength += 3; rev_plus += 0.1; revolutionary_preparations += 0.5*revolution_ready; sapd_relation += 3*kpm_modifier;
+
+We are focusing on our expanding our revolutionary potential and improving our methods of sabotage, organising and military work. 
+
+@operations
+choose-if: para_resources >= 1
+unavailable-subtitle: Not enough resources.
+subtitle: - 1 paramilitary resources
+
+= Democratic Social Front Operations
+
+The Democratic Social Front can do many tasks, what should we focus them this time?
+
+- @train: Focus on trianing existing members. 
+- @military: Focus on funding more military equipment for the RGF. 
+- @unions: Use the RGF to support and defend our unions. 
+- @defend: Focus the RGF on protecting the party.
+- @rev_2: Preparing for revolution is our primary goal. 
+- @rural_3: Maybe we can create a Rural sub-organisation of the RGF.
+- @rural_4: We should work on expanding the Rural Red Guard.
+- @fight: Order the RGF to use all forces to attack the far right. 
+
+@train
+subtitle: this doesn't require additional resources
+on-arrival: rfb_strength += 2; rgf_experce += 0.05
+
+We train the existing members and focus on expanding the <span style="color: #8B0000;">RGF</span> without any additional costs.
+
+
+@rev_2
+on-arrival: rgf_experce += 0.02; rev_plus += 0.05; revolutionary_preparations += revolution_ready; para_resources -= 1; revolutionaries_dissent -= 4; revolutionaries_strength += 3; reformist_dissent += 2; reformist_strength -= 1;
+
+We focus on preparing our revolutionary forces, improving their readyness and extending our information networks
+
+
+@military
+on-arrival: rfb_militancy += 0.03; para_resources -= 1; rfb_strength += 3; rgf_experce += 0.02; revolutionaries_dissent -= 2; revolutionaries_strength += 1;
+
+We fund more military equipment for the <span style="color: #8B0000;">RGF</span>, this makes it better armed and prepared to face their enemies. 
+
+
+@rural_3
+view-if: rgf_agrarian = 0
+on-arrival: rgf_agrarian_support += 3; para_resources -= 1; peasants_spd += 2*(rgf_party/8) if sapd_formed = 0; rural_spd += 1.5*(rgf_party/8) if sapd_formed = 0; peasants_spd += 1.5*(rgf_party/8) if sapd_formed = 1; rural_spd += 1*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 2 if sapd_formed = 1; rural_sapd += 1.5 if sapd_formed = 1; revolutionaries_dissent -= 1; revolutionaries_strength += 1; agrarnians_strength += 2; agrarnians_dissent -= 3;
+
+Maybe we can create a Rural sub-organisation of the <span style="color: #8B0000;">RGF</span>? This will extend our paramilitary wing to the countryside, apease the agrarians and gain us valuble rural support. 
+
+
+@rural_4
+view-if: rgf_agrarian = 1
+on-arrival: rfb_strength += 9; para_resources -= 1; peasants_spd += 4*(rgf_party/8) if sapd_formed = 0; rural_spd += 3*(rgf_party/8) if sapd_formed = 0; peasants_spd += 3*(rgf_party/8) if sapd_formed = 1; rural_spd += 2*(rgf_party/8) if sapd_formed = 1; peasants_sapd += 4 if sapd_formed = 1; rural_sapd += 3 if sapd_formed = 1; revolutionaries_dissent -= 1; revolutionaries_strength += 1; agrarnians_strength += 2; agrarnians_dissent -= 3;
+
+Expanding the <span style="color: #5f9403;">RPG </span> massively helps us in the countryside and expands the reach of the party and the <span style="color: #8B0000;">RGF</span>.
+
+
+@unions
+on-arrival: para_resources -= 1; labor_strength += 3; labor_dissent -= 3; workers_spd += 1*(rgf_party/8); workers_spd += 1*(rgf_party/8) if sapd_formed = 0; workers_sapd += 1.5 if sapd_formed = 1; union_defence += 0.1; rgf_experce += 0.01;
+
+The <span style="color: #8B0000;">RGF</span> trains the union workers, allowing them to defend themselvs and strenthen our unions. 
+
+
+@rfg
+on-arrival: rb_militancy += 0.05*(dsf_rfb_coop/8); para_resources -= 1; rfb_strength += 3*(dsf_rfb_coop/8); dsf_rfb_coop += 1; revolutionaries_dissent -= 3; revolutionaries_strength += 2;
+
+Increase the cooperation bettwen the <span style="color: #b52f2f;">DSF</span> and the <span style="color: #8B0000;">RGF</span>, this strenthens both organisations. 
+
+
+@defend
+choose-if: streetfight >= 1
+unavailable-subtitle: The violence in the country is too low for full on military protection.
+on-arrival: para_resources -= 1; rb_strength -= 10; party_defence += 0.1; dsf_experce += 0.015;
+
+We use the <span style="color: #8B0000;">RGF</span> to protect our party officials and our rallies. 
+
+
+@fight
+choose-if: rfb_strength*rgf_experce*rfb_militancy >= 35
+unavailable-subtitle: The <span style="color: #8B0000;">RGF</span> is not strong enough to covertly strike at the recationaries. 
+on-arrival: rfb_militancy -= 0.02; para_resources -= 1; rfb_strength -= 8; rgf_experce += 0.02; sh_strength -= 8*rfb_militancy; sa_strength -= 8*rfb_militancy; df_strength -= 5*rfb_militancy;
+
+The <span style="color: #8B0000;">RGF</span> focuses on sabotage and disrupts the activity of the far right.
+
+This hinders their abilty to function but also takes a toll on the <span style="color: #8B0000;">RGF</span>.

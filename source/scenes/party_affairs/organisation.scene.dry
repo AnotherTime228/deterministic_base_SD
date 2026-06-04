@@ -1,0 +1,54 @@
+title: Organisation building
+new-page: true
+max-visits: 36
+is-card: true
+view-if: organisation_timer <= 0
+on-arrival: month_actions += 1; organisation_timer += 10
+card-image: img/organise.jpg
+frequency: 100
+tags: party_affairs
+
+= Organisation building
+
+Building class concusness and organisaing the people of Merkopia is a key reponsibility of the party. 
+
+- @workers: We should work towards making every worker a union man!
+- @rural: We can try to maybe organise peasnts and rural population of the country. 
+- @middle: We can try to maybe organise middle class by supporting white collar unions and possibly bringing them under our umberella. 
+- @labour: We can use our strengthend unions to expand them across all social groups.  
+- @root: We either don't want to or cannot organise right now.
+- @easy_discard
+
+@workers
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: workers_spd += 3; organisation_workers += 2; resources -= 1; labor_strength += 4; labor_dissent -= 6; organisation_workers += 1 if labor_strength >= 40
+
+We have supprted and increased organisaing among the workers. [? if labor_strength >= 40: The high strenth of the labor faction makes our organising much easier. ?]
+
+@middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: new_middle_spd += 1.5; old_middle_spd += 1.5; organisation_middle += 1.5; resources -= 1; labor_strength += 2; labor_dissent -= 4; reformist_strength += 2; reformist_dissent -= 4; organisation_middle += 1 if united_front_theory = 2
+
+We have supprted and increased organisaing among the middle class, maybe this can awake the class consciousness of these people. 
+
+@rural
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: peasants_spd += 3; rural_spd += 1; organisation_rural += 2; organisation_rural += 1 if agrarnians_strength >= 50; resources -= 1; agrarnians_strength += 4; agrarnians_dissent -= 6; 
+
+We have increased our campaigning among farmers. [? if agrarnians_strength >= 50: The high strenth of the agrarnian faction makes our organising much easier. ?]
+
+
+@labour 
+subtitle: We have emopwered the labor faction enought, that they can now efficiently expand independenty!
+view-if: labor_strength >= 40
+choose-if: labor_strength >= 60
+unavailable-subtitle: Labour not strong enough.
+on-arrival: organisation_workers += 2; organisation_rural += 1; organisation_middle += 1; workers_spd += 2; new_middle_spd += 1; peasants_spd += 1; labor_strength += 5; labor_dissent -= 10
+
+We have increased our campaigning among the peasants. [? if agrarnians_strength >= 40: The strenth of the argrarian faction makes campaining among peasants much easier ?] [? if united_front_theory = 1: Our adoption of the United Front Theory including the rural class makes them open to the socialist capmpaining ?] [? if united_front_theory = 2: Our adoption of the United Front Theory including the rural class makes them open to the socialist capmpaining ?] [? if socialism <= 40 and nationalism >= 50: The traditionalism in this group makes our campaning more difficult. ?]

@@ -1,0 +1,11 @@
+title: 1271
+subtitle: A new year 
+on-arrival: {!
+Q.budget += Q.tax;
+!}
+tags: event
+view-if: year = 1271 and month = 1 
+priority: 2
+max-visits: 1
+
+A new year begins.

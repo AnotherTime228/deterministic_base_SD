@@ -1,0 +1,76 @@
+title: Preparing the Revolution
+new-page: true
+view-if: revolution_prep <= 0 and party_policy_main >= 1
+on-arrival: revolution_prep += 7; month_actions += 1; rg_militarisation_cost = 2;
+is-card: true
+card-image: img/rev_prep.jpg
+tags: paramilitary
+max-visits: 20
+
+= Preparing the Revolution 
+
+- @weapons: Secure weaponry for our revolutionaries.
+- @plan: Draw up plans for our revolution and imporve our strategies.
+- @infiltrate: Inflitrate the rectionary bureaucracy of the state and secure their loyality.
+- @organisation: Radicalise the workers and prepare them for the upcoming revolution. 
+- @rev_begin: Mobilise the Red Guards and the workers!
+- @nothing: Abstain form doing anything (for now).
+- @tone_down: We should tone down our revolutionary preparations.
+- @easy_discard
+
+@weapons
+subtitle: -1 paramilitary resources
+choose-if: para_resources >= 1
+unavailable-subtitle: We dont have enough funds.
+on-arrival: para_resources -= 1; rb_strength += 3; rfb_militancy += 0.05; dsf_experce += 0.01; rfb_strength += 4; rgf_experce += 0.01; revolutionaries_dissent -= 3; revolutionaries_strength += 3; left_strength += 3; left_dissent -= 3; sapd_relation += 2*kpm_modifier; radicalisation += 0.5;
+
+We secure better weaponry for the <span style="color: #8B0000;">RGF</span> and our revolutionary forces.  
+
+
+@plan
+subtitle: -1 paramilitary resources
+choose-if: para_resources >= 1
+unavailable-subtitle: We dont have enough funds.
+on-arrival: para_resources -= 1; rev_plus += 0.2; rgf_experce += 0.01; revolutionaries_dissent -= 3; revolutionaries_strength += 3; left_strength += 3; left_dissent -= 3; sapd_relation += 2*kpm_modifier; revolutionary_preparations += 1.5*revolution_ready; radicalisation += 0.5;
+
+We prepare better revolutionary plans and prepare for the inevitable day... 
+
+
+@infiltrate
+subtitle: -1 paramilitary resources
+choose-if: para_resources >= 1
+unavailable-subtitle: We dont have enough funds.
+on-arrival: para_resources -= 1; infiltration_state += 1*revolution_ready; rgf_experce += 0.01; revolutionaries_dissent -= 3; revolutionaries_strength += 3; left_strength += 3; left_dissent -= 3; sapd_relation += 2*kpm_modifier; revolutionary_preparations += 1.5*revolution_ready; prussian_police_loyalty += 0.08*revolution_ready; interior_police_loyalty += 0.06*revolution_ready; reichswehr_loyalty += 0.04*revolution_ready; radicalisation += 0.5;
+
+We infiltrate state bureaucracy and military, enbeding our spies in their ranks and gaining sympathisers there. 
+
+
+@organisation
+subtitle: -1 paramilitary resources
+choose-if: para_resources >= 1
+unavailable-subtitle: We dont have enough funds.
+on-arrival: para_resources -= 1; rb_strength += 2; dsf_experce += 0.01; rfb_strength += 1; rgf_experce += 0.01; union_defence += 0.15*revolution_ready; revolutionaries_strength += 2; left_strength += 2; revolutionaries_dissent -= 2; center_dissent -= 2; left_dissent -= 2; revolutionary_preparations += 1*revolution_ready; organisation_workers += 1; labor_strength += 3; labor_dissent -= 3; radicalisation += 1; sapd_relation += 2*kpm_modifier; labour_unrest += 2; socialism += 1*revolution_ready; workers_spd += 1.5*(rgf_party/8); workers_sapd += 3 if sapd_formed = 1;
+
+The workers are the core of the revolution and we are agitation them towrds that goal.  
+
+@rev_begin
+subtitle: This mean the start of our revolution...
+view-if: revolutionary_preparations >= 10
+on-arrival: dsf_rfb_coop += 2.5
+
+WIP
+
+@tone_down
+subtitle: This will gain us additional resources. 
+choose-if: party_policy_rev <= 1
+unavailable-subtitle: We cannot decrese our revolutionary preparations when we support the revolution. 
+on-arrival: para_resources += 1; revolutionaries_dissent += 6; sapd_relation -= 4/kpm_modifier; left_dissent += 4; reformist_dissent -= 4; reformist_strength += 4; revolutionaries_strength -= 4; left_strength -= 2; ddp_relation += 3*fvp_modifer; z_relation += 2*gdsu_modifer; revolutionary_preparations -= 2*revolution_ready; radicalisation -= 1;
+
+We tone down our revolutionary preparations. This gains us some funds, while angering the revolutionaries it is a step towards reformish. 
+
+
+@nothing
+
+Whether it is because we *cannot* or *will not*, we do not make ties with other parties at this moment.
+
+- @return: Continue...
