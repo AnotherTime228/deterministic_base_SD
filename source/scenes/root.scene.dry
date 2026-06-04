@@ -128,12 +128,13 @@ Q.organisation_middle = 11;
 Q.expand_media = 0;
 Q.rev_plus = 0;
 Q.revolutionary_preparations = 0;
+Q.infiltration_state = 0;
 
-// party_policy - congresses 
+// party_policy - congresses (+++ its more left wing --- is more right wing )
 
-Q.party_policy_main = 0; // REFORM - REVOLUTION
-Q.party_policy_rev = 0; // what to do with revolution
-Q.party_policy_coalition = 0; // COALITIONS
+Q.party_policy_main = 1; // REFORM - REVOLUTION
+Q.party_policy_rev = 2; // what to do with revolution
+Q.party_policy_coalition = 1; // COALITIONS
 Q.united_front_theory = 0; // UNITED FRONT THEORY
 Q.party_policy_unions = 0; // UNIONS
 Q.party_policy_land = 0; // LAND REFROM 
@@ -153,7 +154,7 @@ Q.gdsu_left = 0;
 Q.gdsu_ideology = 0; // +++ its more left wing --- is more right wing 
 
 Q.fvp_ideology = 0;
-Q.fvp_path = 0; // 0 - centre, 1 -  left, 2 - right
+Q.fvp_path = 0; // 0 - centre, 1 -  left, -1 - right
 
 Q.fvp_modifer = 1;
 Q.ldp_modifer = 1;
