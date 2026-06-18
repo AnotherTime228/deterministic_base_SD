@@ -298,6 +298,8 @@ Q.old_other_r = 9;
 // for changing parties name
 Q.kprp_name = "KPRP";
 Q.chzjn_name = "NKWSD";
+Q.kprp_full_name = "Communist Workers' Party of Poland"
+Q.chzjn_full_name = "The National Electoral Committee of Democratic Parties"
 
 // array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
 Q.election_records = [];

@@ -35,25 +35,39 @@ President: [+ president +]
 
 Chancellor: [+ chancellor +] ([+ chancellor_party +])
 
-Reichstag composition:
+Ssjm composition:
 
-# 1928: 30, 1930: 25, 1932: 22
-{!<span class="tooltip-text" title="Social Democratic Party of Germany">SPD</span>!}: [+ spd_r +]%
-[? if sapd_formed and sapd_r > 0: SAPD: [+ sapd_r +]% ?]
-# 1928: 15, 1930: 15, 1932: 
-{!<span class="tooltip-text" title="Center Party + Bavarian People's Party">Z + BVP</span>!}: [+ z_r +]%
-# 1928: 10, 1930: 13
-{!<span class="tooltip-text" title="Communist Party of Germany">KPD</span>!}: [+ kpd_r +]%
-# 1928: 5, 1930: 4 (as DstP)
-{!<span class="tooltip-text" title="German Democratic Party">!}[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_r +]%
-# 1928: 9, 1930: 5
-{!<span class="tooltip-text" title="German People's Party">DVP</span>!}: [+ dvp_r +]%
-# 1928: 14, 1930: 7
-{!<span class="tooltip-text" title="German National People's Party">DNVP</span>!}: [+ dnvp_r +]%
-# 1928: 3, 1930: 18
-{!<span class="tooltip-text" title="National-Socialist German Worker's Party (Nazis)">NSDAP</span>!}: [+ nsdap_r +]%
-# 1928: 9, 1930: 10
-Others: [+ other_r +]%
+[? if kprp_exist:
+<span style="color: #890000;">**{!<span class="tooltip-text" title="[+ kprp_full_name +]">[+ kprp_name +]</span>!}**</span>: [+ kprp_sj +]%
+?]
+
+<span style="color: #C62828;">**{!<span class="tooltip-text" title="Polish Socialist Party">PPS</span>!}**</span>: [+ pps_sj +]%
+
+<span style="color: #841839;">**{!<span class="tooltip-text" title="National Workers' Party">NPR</span>!}**</span>: [+ npr_sj +]%
+
+<span style="color: #80FF00;">**{!<span class="tooltip-text" title="Polish People's Party - Left">PSL-L</span>!}**</span>: [+ psl_l_sj +]%
+
+[? if chsr_exist:
+<span style="color: #43C46C;">**{!<span class="tooltip-text" title="Radical Peasant Party">ChSR</span>!}**</span>: [+ chsr_sj +]%
+?]
+
+<span style="color: #179900;">**{!<span class="tooltip-text" title="Polish People's Party - Liberation">PSL-W</span>!}**</span>: [+ psl_w_sj +]%
+
+<span style="color: #3A6538;">**{!<span class="tooltip-text" title="Polish People's Party - Piast">PSL-P</span>!}**</span>: [+ psl_p_sj +]%
+
+<span style="color: #FFF480;">**{!<span class="tooltip-text" title="Ukrainian Parties">PU</span>!}**</span>: [+ pu_sj +]%
+
+[? if bmn_exist:
+<span style="color: #E3AF34;">**{!<span class="tooltip-text" title="Bloc of National Minorities">BMN</span>!}**</span>: [+ bmn_sj +]%
+?]
+
+<span style="color: #C40000;">**{!<span class="tooltip-text" title="Jewish Parties">PZ</span>!}**</span>: [+ pz_sj +]%
+
+<span style="color: #FFD700;">**{!<span class="tooltip-text" title="Polish Centre">PC</span>!}**</span>: [+ pc_sj +]%
+
+[? if chzjn_exist:
+<span style="color: #312E99;">**{!<span class="tooltip-text" title="[+ chzjn_full_name +]">[+ chzjn_name +]</span>!}**</span>: [+ chzjn_sj +]%
+?]
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
