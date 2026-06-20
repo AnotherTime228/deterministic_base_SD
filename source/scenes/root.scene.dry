@@ -83,10 +83,10 @@ Q.moderate_plan_adopted = 0;
 // inter-party relations
 Q.kprp_relation = 20;
 Q.npr_relation = 25;
-Q.psl-l_relation = 60;
+Q.psl_l_relation = 60;
 Q.chsr_relation = 30;
-Q.psl-w_relation = 35;
-Q.psl-p_relation = 30;
+Q.psl_w_relation = 35;
+Q.psl_p_relation = 30;
 Q.pu_relation = 50;
 Q.bmn_relation = 60;
 Q.pz_relation = 50;
@@ -192,7 +192,7 @@ Q.upper = 3;
 // Unemployment is technically low, but Rural Poverty is high
 
 Q.unemployed = 4;
-Q.minority = 8;
+Q.minority = 9;
 
 Q.inflation = 2.9;
 
@@ -208,8 +208,8 @@ Q.middle_qol = 100;
 Q.upper_qol = 100;
 Q.unemployed_qol = 100;
 
-Q.classes = ['peasants', 'peasants', 'middle', 'upper', 'unemployed', 'minority'];
-Q.parties = ['pps', 'npr', 'psl-l', 'psl-w', 'psl-p', 'pu', 'pz', 'pc', 'others'];
+Q.classes = ['peasants', 'workers', 'middle', 'upper', 'unemployed', 'minority'];
+Q.parties = ['pps', 'npr', 'psl_l', 'psl_w', 'psl_p', 'pu', 'pz', 'pc', 'other'];
 
 // future parties
 Q.kprp_formed = 0;
@@ -225,60 +225,66 @@ Q.chzjn_full_name = "The National Electoral Committee of Democratic Parties";
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 60;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 5;
-Q.workers_nsdap = 0;
-Q.workers_other = 10;
 
-Q.old_middle_spd = 5;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp= 10;
-Q.old_middle_dvp = 25;
-Q.old_middle_dnvp = 25;
-Q.old_middle_nsdap = 10;
-Q.old_middle_other = 10;
+Q.peasants_pps = 0;
+Q.peasants_npr = 0;
+Q.peasants_psl_l = 10;
+Q.peasants_psl_w = 67
+Q.peasants_psl_p = 20;
+Q.peasants_pu = 0;
+Q.peasants_pz = 0;
+Q.peasants_pc = 0;
+Q.peasants_other = 0;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 1;
-Q.new_middle_z = 10;
-Q.new_middle_ddp= 25;
-Q.new_middle_dvp = 25;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 5;
-Q.new_middle_other = 15;
+Q.workers_pps = 67;
+Q.workers_npr = 0;
+Q.workers_psl_l = 0;
+Q.workers_psl_w = 0;
+Q.workers_psl_p = 6;
+Q.workers_pu = 7;
+Q.workers_pz = 0;
+Q.workers_pc = 0;
+Q.workers_other = 0;
 
-Q.rural_spd = 10;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp= 5;
-Q.rural_dvp = 15;
-Q.rural_dnvp = 45;
-Q.rural_nsdap = 5;
-Q.rural_other = 10;
+Q.middle_pps = 0;
+Q.middle_npr = 0;
+Q.middle_psl_l = 0;
+Q.middle_psl_w = 0;
+Q.middle_psl_p = 0;
+Q.middle_pu = 0;
+Q.middle_pz = 0;
+Q.middle_pc = 0;
+Q.middle_other = 0;
 
-Q.unemployed_spd = 25;
-Q.unemployed_kpd = 55;
-Q.unemployed_z = 1;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 15;
-Q.unemployed_other = 9;
+Q.upper_pps = 0;
+Q.upper_npr = 0;
+Q.upper_psl_l = 0;
+Q.upper_psl_w = 0;
+Q.upper_psl_p = 0;
+Q.upper_pu = 0;
+Q.upper_pz = 0;
+Q.upper_pc =  0;
+Q.upper_other =  0;
 
-Q.catholics_spd = 15;
-Q.catholics_kpd = 2;
-Q.catholics_z = 50;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 0;
-Q.catholics_other = 12;
+Q.unemployed_pps = 20;
+Q.unemployed_npr = 24;
+Q.unemployed_psl_l = 0:
+Q.unemployed_psl_w = 0;
+Q.unemployed_psl_p = 30;
+Q.unemployed_pu = 0;
+Q.unemployed_pz = 0;
+Q.unemployed_pc = 0;
+Q.unemployed_other = 0;
 
+Q.minority_pps = 4;
+Q.minority_npr = 1;
+Q.minority_psl_l = 3;
+Q.minority_psl_w = 6;
+Q.minority_psl_p = 5;
+Q.minority_pu = 0;
+Q.minority_pz = 65;
+Q.minority_pc = 2;
+Q.minority_other = 14;
 
 // Current Sejm Composition
 // % of Reichstag in Jan 1928
