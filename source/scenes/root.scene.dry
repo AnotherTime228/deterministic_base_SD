@@ -321,33 +321,29 @@ Q.economic_records = [];
 
 // State of the government
 Q.kprp_in_government = 0;
-Q.z_in_government = 1;
-Q.ddp_in_government = 0;
-Q.dvp_in_government = 1;
-Q.dnvp_in_government = 1;
-Q.kpd_in_government = 0;
-Q.nsdap_in_government = 0;
+Q.pps_in_government = 0;
+Q.npr_in_government = 0;
+Q.psl_l_in_government = 0;
+Q.chsr_in_government = 0;
+Q.psl_w_in_government = 0;
+Q.psl_p_in_government = 0;
+Q.pu_in_government = 0;
+Q.bmn_in_government = 0;
+Q.pz_in_government = 0;
+Q.pc_in_government = 0;
+Q.chzjn_in_government = 0;
+Q.other_in_government = 0;
 
+// temporary
+// kprp to psl-p
+Q.in_left_coalition = 0;
+// psl-p to other ?
 Q.in_right_coalition = 0;
-// Weimar coalition = SPD + Z + DDP
-Q.in_weimar_coalition = 0;
-// Grand coalition = SPD + Z + BVP + DDP + DVP
-// also includes the "new grand coalition" of SPD + Z + BVP + DDP + DVP + Others
-Q.in_grand_coalition = 0;
-// Popular front = SPD + KPD + Z + DDP
-Q.in_popular_front = 0;
-// left coalition = SPD + KPD + left-splinters
-Q.in_left_front = 0;
-// emergency government containing the SPD: only president Braun can do this.
-Q.in_emergency_government = 0;
-Q.in_spd_majority = 0;
-Q.grand_coalition_failed = 0;
-// if the SPD is ruling as part of a minority government
-Q.in_minority_government = 0;
-// national unity governmet
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
+// if not in gov
+Q.other_coalition_dissent = 0;
 
 // does the SPD tolerate the government even if it is not a participant?
 Q.pps_toleration = 0;
