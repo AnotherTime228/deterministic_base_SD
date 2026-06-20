@@ -320,11 +320,7 @@ Q.economic_records = [];
 
 
 // State of the government
-Q.president = "Hindenburg";
-// starting chancellor: Wilhelm Marx
-Q.chancellor = "Marx";
-Q.chancellor_party = 'Z';
-Q.spd_in_government = 0;
+Q.kprp_in_government = 0;
 Q.z_in_government = 1;
 Q.ddp_in_government = 0;
 Q.dvp_in_government = 1;
@@ -352,34 +348,26 @@ Q.in_minority_government = 0;
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
-// dissent from the KPD, in a popular front or left front government
-Q.kpd_coalition_dissent = 0;
 
 // does the SPD tolerate the government even if it is not a participant?
-Q.spd_toleration = 0;
+Q.pps_toleration = 0;
 
 // is the current government a presidential minority government?
 Q.minority_government = 0;
 
 // ministries - which parties control the ministries?
-// starting with the 4th Marx cabinet https://en.wikipedia.org/wiki/Fourth_Marx_cabinet
-// is the agricultural ministry useful at all?
-Q.foreign_minister = 'Streseman';
-Q.foreign_minister_party = 'DVP';
-Q.interior_minister = 'von Keudell';
-Q.interior_minister_party = 'DNVP';
-Q.justice_minister = 'Hergt';
-Q.justice_minister_party = 'DNVP';
-Q.labor_minister = 'Brauns';
-Q.labor_minister_party = 'Z';
-Q.reichswehr_minister = 'Groener';
-Q.reichswehr_minister_party = 'I';
-Q.economic_minister = 'Curtius';
-Q.economic_minister_party = 'DVP';
-Q.finance_minister = 'Köhler';
-Q.finance_minister_party = 'Z';
-Q.agriculture_minister = 'Schiele';
-Q.agriculture_minister_party = 'DNVP';
+// https://pl.wikipedia.org/wiki/Rz%C4%85d_Ignacego_Jana_Paderewskiego
+// Simplified and clean ver.
+Q.prime_minister_party = 'Vacant';
+Q.prime_minister = 'Vacant';
+Q.labor_minister_party = 'Vacant';
+Q.treasury_minister_party = 'Vacant';
+Q.agriculture_minister_party = 'Vacant';
+Q.exterior_minister_party = 'Vacant';
+Q.exterior_minister = 'Vacant';
+Q.interior_minister_party = 'Vacant'
+Q.military_minister_party = 'Vacant';
+Q.justice_minister_party = 'Vacant';
 
 // Events: what has occurred?
 Q.panzerkreuzer_seen = 0;
@@ -493,9 +481,9 @@ Q.n_elections = 0;
 Q.no_majority_elections = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
-Q.next_election_year = 1928;
-Q.next_election_month = 5;
-Q.next_election_time = 5;
+Q.next_election_year = 1919;
+Q.next_election_month = 1;
+Q.next_election_time = 1;
 // government affairs timers
 Q.agricultural_policy_timer = 0;
 Q.domestic_enemies_timer = 0;
