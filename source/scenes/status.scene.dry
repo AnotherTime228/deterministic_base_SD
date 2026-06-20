@@ -45,15 +45,15 @@ Ssjm composition:
 
 <span style="color: #841839;">**{!<span class="tooltip-text" title="National Workers' Party">NPR</span>!}**</span>: [+ npr_sj +]%
 
-<span style="color: #80FF00;">**{!<span class="tooltip-text" title="Polish People's Party - Left">PSL-L</span>!}**</span>: [+ psl_l_sj +]%
+<span style="color: #80FF00;">**{!<span class="tooltip-text" title="Polish People's Party - Left">PSL-L</span>!}**</span>: [+ psl-l_sj +]%
 
 [? if chsr_formed:
 <span style="color: #43C46C;">**{!<span class="tooltip-text" title="Radical Peasant Party">ChSR</span>!}**</span>: [+ chsr_sj +]%
 ?]
 
-<span style="color: #179900;">**{!<span class="tooltip-text" title="Polish People's Party - Liberation">PSL-W</span>!}**</span>: [+ psl_w_sj +]%
+<span style="color: #179900;">**{!<span class="tooltip-text" title="Polish People's Party - Liberation">PSL-W</span>!}**</span>: [+ psl-w_sj +]%
 
-<span style="color: #3A6538;">**{!<span class="tooltip-text" title="Polish People's Party - Piast">PSL-P</span>!}**</span>: [+ psl_p_sj +]%
+<span style="color: #3A6538;">**{!<span class="tooltip-text" title="Polish People's Party - Piast">PSL-P</span>!}**</span>: [+ psl-p_sj +]%
 
 <span style="color: #FFF480;">**{!<span class="tooltip-text" title="Ukrainian Parties">PU</span>!}**</span>: [+ pu_sj +]%
 
